@@ -3,9 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { margin: 0; padding: 0; background: #000; text-align: center; }
+<style>
+    body { margin: 0; padding: 0; background: #000; text-align: center; color: #fff; font-family: sans-serif; }
     img { width: 100%; max-width: 1080px; display: block; margin: 0 auto; }
+    
+    /* 텍스트 입력용 박스 스타일 */
+    .text-box {
+      max-width: 1080px;
+      margin: 20px auto;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      background: #111; /* 박스 배경색 */
+      border: 1px solid #333; /* 박스 테두리 */
+      border-radius: 8px;
+      text-align: center;
+    }
+    .text-title { font-size: 28px; font-weight: bold; color: #fff; margin-bottom: 15px; }
+    .text-content { font-size: 18px; line-height: 1.6; color: #ccc; }
   </style>
 </head>
 <body>
@@ -30,5 +44,12 @@
   <img src="KakaoTalk_20260827_163644482_18.png">
   <img src="KakaoTalk_20260827_163644482_19.png">
   <img src="KakaoTalk_20260827_163644482_20.png">
+  <div class="text-box">
+    <div class="text-title">여기에 제목을 입력하세요</div>
+    <div class="text-content">
+      여기에 원하는 본문 내용을 적으시면 됩니다.<br>
+      줄바꿈은 &lt;br&gt; 태그를 쓰거나 계속 입력하면 됩니다.
+    </div>
+  </div>
 </body>
 </html>
