@@ -5,7 +5,7 @@
     { name: "무료가입", link: "http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0", bg: "#ffccaa" },
     { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#a3e4d7" },
     { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2" },
-    { name: "문의", link: "https://youtube.com/shorts/cxyL38WZ6ZY?feature=share", bg: "#ffc4d7" }
+    { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7" }
   ];
 
   // 하단 메뉴 데이터
