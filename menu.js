@@ -1,38 +1,6 @@
-/* menu.js */
+/* menu.js - 메뉴 소실 문제 완전 해결본 */
 (function () {
-  // 1. 깨짐 방지용 핵심 CSS 자동 주입
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .cell-nav, .cell-nav-bottom {
-      display: flex !important;
-      width: 100% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-    }
-    .cell-nav { position: sticky; top: 0; z-index: 1000; }
-    .cell-nav-bottom { position: fixed; bottom: 0; left: 0; z-index: 9999; box-shadow: 0 -2px 8px rgba(0,0,0,0.4); }
-    .cell-nav .cell-item, .cell-nav-bottom .cell-item {
-      flex: 1 1 0px !important;
-      width: 0 !important;
-      min-width: 0 !important;
-      display: block !important;
-      padding: 14px 0 !important;
-      font-size: 18px !important;
-      font-weight: bold !important;
-      text-decoration: none !important;
-      color: #000000 !important;
-      text-align: center !important;
-      box-sizing: border-box !important;
-      border-right: 1px solid rgba(0, 0, 0, 0.1) !important;
-    }
-    .cell-nav .cell-item:last-child, .cell-nav-bottom .cell-item:last-child {
-      border-right: none !important;
-    }
-  `;
-  document.head.appendChild(style);
-
-  // 2. 메뉴 데이터 관리
+  // 상단 메뉴 데이터
   const topMenu = [
     { name: "회원가입", link: "http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0", bg: "#ffccaa" },
     { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#a3e4d7" },
@@ -40,6 +8,7 @@
     { name: "문의", link: "https://youtube.com/shorts/cxyL38WZ6ZY?feature=share", bg: "#ffc4d7" }
   ];
 
+  // 하단 메뉴 데이터
   const bottomMenu = [
     { name: "HOME", link: "https://hubinfolink.github.io/akg/", bg: "#a3e4d7" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#ffccaa" },
@@ -47,22 +16,30 @@
     { name: "하단메뉴4", link: "contact.html", bg: "#ffc4d7" }
   ];
 
-  // 3. 화면 그리기
-  function init() {
-    const topEl = document.querySelector('.cell-nav');
-    const bottomEl = document.querySelector('.cell-nav-bottom');
+  function buildMenu() {
+    // 1. 상단 메뉴 렌더링
+    const topTargets = document.querySelectorAll('.cell-nav, #top-nav-container');
+    topTargets.forEach(el => {
+      el.className = 'cell-nav'; // 클래스명 강제 고정
+      el.innerHTML = topMenu.map(m => 
+        `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};">${m.name}</a>`
+      ).join('');
+    });
 
-    if (topEl) {
-      topEl.innerHTML = topMenu.map(m => `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};">${m.name}</a>`).join('');
-    }
-    if (bottomEl) {
-      bottomEl.innerHTML = bottomMenu.map(m => `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};">${m.name}</a>`).join('');
-    }
+    // 2. 하단 메뉴 렌더링
+    const bottomTargets = document.querySelectorAll('.cell-nav-bottom, #bottom-nav-container');
+    bottomTargets.forEach(el => {
+      el.className = 'cell-nav-bottom'; // 클래스명 강제 고정
+      el.innerHTML = bottomMenu.map(m => 
+        `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};">${m.name}</a>`
+      ).join('');
+    });
   }
 
+  // 문서 로딩 상태와 상관없이 무조건 즉시 + 로딩후 double 실행으로 미출력 방지
+  buildMenu();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+    document.addEventListener('DOMContentLoaded', buildMenu);
   }
+  window.addEventListener('load', buildMenu);
 })();
