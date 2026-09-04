@@ -97,7 +97,7 @@ img {
 .text-box a {
   color: #ffffff !important;       /* 글자색 흰색 고정 */
   text-decoration: none;           /* 밑줄 제거 (원하면 underline으로 변경 가능) */
-  font-size: 18px;                 /* 글자 크기 적정 조율 */
+  font-size: 24px;                 /* 글자 크기 적정 조율 */
   font-weight: bold;               /* 가독성을 위한 두껍게 처리 */
   display: block;                  /* 클릭 영역 확대 */
   word-break: keep-all;            /* 모바일에서 단어 단위 줄바꿈 처리 */
