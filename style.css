@@ -42,31 +42,47 @@ body {
 }
 
 
-/* 하단 고정 네비게이션 */
+/* 하단 고정 가로 메뉴바 */
 .cell-nav-bottom {
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 1000;
-  display: flex;
   width: 100%;
+  z-index: 9999; /* 다른 요소에 가려지지 않게 최상위 배치 */
+  display: flex !important; /* 강제로 가로 배치 적용 */
+  flex-direction: row !important;
   margin: 0;
   padding: 0;
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); /* 본문과 구분되는 상단 그림자 효과 */
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4); /* 본문 경계선 그림자 */
 }
 
 .cell-nav-bottom::-webkit-scrollbar {
   display: none;
 }
 
-/* 하단 고정 바로 인해 본문 맨 밑 내용이 가려지지 않도록 여백 확보 */
-body {
-  padding-bottom: 50px; /* 하단 바 높이에 맞춰 조절 */
+/* 하단 셀 아이템 스타일 */
+.cell-nav-bottom .cell-item {
+  flex: 0 0 33.333%; /* 한 화면에 3개씩 가로 배치 (4개 원하면 25%) */
+  display: block;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+/* 하단 바 높이(약 50px)만큼 본문 밑여백을 줘서 마지막 콘텐츠가 가려지지 않게 방지 */
+body {
+  padding-bottom: 60px !important;
+}
+
 
 
 /* 이미지 스타일 */
