@@ -13,51 +13,37 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    /* 상단 고정 네비게이션 바 */
-    .sticky-nav {
+    /* 엑셀 셀 형태의 상단 고정 네비게이션 */
+    .cell-nav {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background-color: rgba(17, 17, 17, 0.95);
-      border-bottom: 1px solid #333;
-      backdrop-filter: blur(5px);
-      padding: 10px 0;
-      text-align: center;
-    }
-
-    /* 가로 스크롤 메뉴 영역 */
-    .nav-container {
       display: flex;
-      overflow-x: auto;
-      white-space: nowrap;
-      padding: 0 10px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox 스크롤바 숨김 */
+      width: 100%;
+      margin: 0;
+      padding: 0;
     }
 
-    .nav-container::-webkit-scrollbar {
-      display: none; /* Chrome, Safari 스크롤바 숨김 */
-    }
-
-    /* 메뉴 아이템 스타일 */
-    .nav-item {
-      flex: 0 0 auto;
-      color: #ccc;
+    /* 각 메뉴 항목 (셀) */
+    .cell-item {
+      flex: 1; /* 동일한 비율로 등분 */
+      display: block;
+      padding: 14px 0;
+      font-size: 16px;
+      font-weight: bold;
       text-decoration: none;
-      font-size: 14px;
-      padding: 8px 16px;
-      margin: 0 4px;
-      border-radius: 20px;
-      background: #222;
-      border: 1px solid #444;
-      transition: all 0.2s ease;
+      color: #000000; /* 셀 배경색과 대비를 위한 검은색 글씨 */
+      text-align: center;
+      box-sizing: border-box;
+      /* 엑셀 경계선 느낌을 주는 미세한 구분선 */
+      border-right: 1px solid rgba(0, 0, 0, 0.1); 
     }
 
-    .nav-item:hover, .nav-item:active {
-      color: #ffd700;
-      border-color: #ffd700;
+    .cell-item:last-child {
+      border-right: none;
     }
 
+    /* 이미지 스타일 */
     img {
       width: 100%;
       max-width: 1080px;
@@ -95,15 +81,11 @@
 </head>
 <body>
 
-  <nav class="sticky-nav">
-    <div class="nav-container">
-      <a href="#section1" class="nav-item">회원가입</a>
-      <a href="#section2" class="nav-item">쇼핑몰</a>
-      <a href="#section3" class="nav-item">마이오피스</a>
-      <a href="#section4" class="nav-item">사례</a>
-      <a href="#section5" class="nav-item">메뉴 5</a>
-      <a href="#section6" class="nav-item">메뉴 6</a>
-    </div>
+  <nav class="cell-nav">
+    <a href="http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0" class="cell-item" style="background-color: #ffccaa;">회원가입</a>
+    <a href="https://www.roadmir.com/" class="cell-item" style="background-color: #a3e4d7;">쇼핑몰</a>
+    <a href="https://www.nextstarglobal.com/" class="cell-item" style="background-color: #d7bde2;">오피스</a>
+        <a href="#">사례</a>
   </nav>
 
   <div class="text-box">
