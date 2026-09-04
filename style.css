@@ -42,7 +42,7 @@ body {
   min-width: 0 !important;   /* 텍스트 길어짐으로 인한 가로 밀림 방지 */
   display: block;
   padding: 14px 0;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
   text-decoration: none;
   color: #000000;
