@@ -1,6 +1,6 @@
-/* menu.js - 레이아웃 깨짐 방지 및 링크 유지 완전본 */
+/* menu.js */
 document.addEventListener("DOMContentLoaded", function () {
-  // 1. 상단 메뉴 생성
+  // 1. 상단 메뉴 (<nav class="cell-nav"> 로 교체)
   const topNav = document.createElement("nav");
   topNav.className = "cell-nav";
   topNav.innerHTML = `
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <a href="https://youtube.com/shorts/cxyL38WZ6ZY?feature=share" class="cell-item" style="background-color: #ffc4d7;">문의</a>
   `;
 
-  // 2. 하단 메뉴 생성
+  // 2. 하단 메뉴 (<nav class="cell-nav-bottom"> 으로 교체)
   const bottomNav = document.createElement("nav");
   bottomNav.className = "cell-nav-bottom";
   bottomNav.innerHTML = `
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <a href="contact.html" class="cell-item" style="background-color: #ffc4d7;">하단메뉴4</a>
   `;
 
-  // 3. 기존 컨테이너 타겟 교체
+  // 3. ID 요소를 완벽한 NAV 태그로 1:1 대체
   const topTarget = document.getElementById("top-nav-container");
   const bottomTarget = document.getElementById("bottom-nav-container");
 
