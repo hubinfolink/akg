@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
+  <style>
     body {
       margin: 0;
       padding: 0;
@@ -12,6 +12,51 @@
       color: #fff;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
+
+    /* 상단 고정 네비게이션 바 */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(17, 17, 17, 0.95);
+      border-bottom: 1px solid #333;
+      backdrop-filter: blur(5px);
+      padding: 10px 0;
+    }
+
+    /* 가로 스크롤 메뉴 영역 */
+    .nav-container {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 0 10px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox 스크롤바 숨김 */
+    }
+
+    .nav-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari 스크롤바 숨김 */
+    }
+
+    /* 메뉴 아이템 스타일 */
+    .nav-item {
+      flex: 0 0 auto;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 16px;
+      margin: 0 4px;
+      border-radius: 20px;
+      background: #222;
+      border: 1px solid #444;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item:hover, .nav-item:active {
+      color: #ffd700;
+      border-color: #ffd700;
+    }
+
     img {
       width: 100%;
       max-width: 1080px;
@@ -19,6 +64,7 @@
       display: block;
       margin: 0 auto;
     }
+
     /* 텍스트 박스 디자인 */
     .text-box {
       max-width: 1080px;
@@ -31,12 +77,14 @@
       text-align: center;
       width: 90%;
     }
+
     .text-title {
       font-size: 24px;
       font-weight: bold;
       color: #ffffff;
       margin-bottom: 12px;
     }
+
     .text-content {
       font-size: 16px;
       line-height: 1.6;
@@ -45,14 +93,27 @@
   </style>
 </head>
 <body>
-    <div class="text-box">
+
+  <nav class="sticky-nav">
+    <div class="nav-container">
+      <a href="#section1" class="nav-item">메뉴 1</a>
+      <a href="#section2" class="nav-item">메뉴 2</a>
+      <a href="#section3" class="nav-item">메뉴 3</a>
+      <a href="#section4" class="nav-item">메뉴 4</a>
+      <a href="#section5" class="nav-item">메뉴 5</a>
+      <a href="#section6" class="nav-item">메뉴 6</a>
+    </div>
+  </nav>
+
+  <div class="text-box">
     <div class="text-title" style="font-size: 32px; color: #ffd700;">
-      만약 내 몸을 10년 전으로 되돌릴수 있다면?</div>
+      만약 내 몸을 10년 전으로 되돌릴수 있다면?
+    </div>
     <div class="text-content">
-  
       
     </div>
   </div>
+
   <img src="KakaoTalk_20260827_163644482.jpg">
   <img src="KakaoTalk_20260827_163644482_01.png">
   <img src="KakaoTalk_20260827_163644482_02.png">
@@ -74,12 +135,14 @@
   <img src="KakaoTalk_20260827_163644482_18.png">
   <img src="KakaoTalk_20260827_163644482_19.png">
   <img src="KakaoTalk_20260827_163644482_20.png">
+
   <div class="text-box">
     <div class="text-title"></div>
     <div class="text-content">
- 이제품은 치료제가 아닙니다. 효능이나 효과도 개인에 따라 다를수 있으므로 큰 치료가 필요하신 분들은 
+      이제품은 치료제가 아닙니다. 효능이나 효과도 개인에 따라 다를수 있으므로 큰 치료가 필요하신 분들은 
       이 제품에 의존하면 안되고 의사의 치료와 상담을 꼭 받으시면서 섭취하는걸 권고합니다.
     </div>
   </div>
+
 </body>
 </html>
