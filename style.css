@@ -66,7 +66,7 @@ body {
 
 /* 하단 셀 아이템 스타일 */
 .cell-nav-bottom .cell-item {
-  flex: 0 0 33.333%; /* 한 화면에 3개씩 가로 배치 (4개 원하면 25%) */
+  flex: 0 0 25%; /* 한 화면에 3개씩 가로 배치 (4개 원하면 25%) */
   display: block;
   padding: 14px 0;
   font-size: 16px;
