@@ -1,0 +1,54 @@
+/* menu.css - 상하단 메뉴 공통 관리 스타일 */
+
+/* 상단 고정 네비게이션 */
+.cell-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex !important;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 하단 고정 네비게이션 */
+.cell-nav-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  display: flex !important;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* 상하단 메뉴 셀 공통 (1/N 완벽 분배) */
+.cell-nav .cell-item,
+.cell-nav-bottom .cell-item {
+  flex: 1 1 0px !important;
+  min-width: 0 !important;
+  display: block;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.cell-nav .cell-item:last-child,
+.cell-nav-bottom .cell-item:last-child {
+  border-right: none;
+}
+
+/* 메뉴 항목별 배경색 일괄 관리 */
+.nav-item-1 { background-color: #ffccaa !important; }
+.nav-item-2 { background-color: #a3e4d7 !important; }
+.nav-item-3 { background-color: #d7bde2 !important; }
+.nav-item-4 { background-color: #ffc4d7 !important; }
