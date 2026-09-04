@@ -1,4 +1,4 @@
-/* style.css - 완전 수정본 */
+/* style.css */
 body {
   margin: 0;
   padding: 0;
@@ -39,6 +39,7 @@ body {
 .cell-nav .cell-item,
 .cell-nav-bottom .cell-item {
   flex: 1 1 0px !important; /* 최소 너비 없이 무조건 N등분 */
+  width: 0 !important;       /* 모바일 사파리 글자 밀림 방지 */
   min-width: 0 !important;   /* 텍스트 길어짐으로 인한 가로 밀림 방지 */
   display: block;
   padding: 14px 0;
@@ -92,18 +93,17 @@ img {
   color: #cccccc;
 }
 
-
 /* 텍스트 박스 내 링크 스타일 설정 */
 .text-box a {
   color: #ffffff !important;       /* 글자색 흰색 고정 */
-  text-decoration: none;           /* 밑줄 제거 (원하면 underline으로 변경 가능) */
-  font-size: 24px;                 /* 글자 크기 적정 조율 */
+  text-decoration: none;           /* 밑줄 제거 */
+  font-size: 24px;                  /* 원본 24px 유지 */
   font-weight: bold;               /* 가독성을 위한 두껍게 처리 */
   display: block;                  /* 클릭 영역 확대 */
   word-break: keep-all;            /* 모바일에서 단어 단위 줄바꿈 처리 */
 }
 
-/* 마우스 오버 또는 클릭 시 약간 밝은 그레이로 전환 (선택 사항) */
+/* 마우스 오버 또는 클릭 시 */
 .text-box a:hover, 
 .text-box a:active, 
 .text-box a:visited {
