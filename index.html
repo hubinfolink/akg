@@ -13,35 +13,38 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
-    /* 엑셀 셀 형태의 상단 고정 네비게이션 */
-    .cell-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
+/* 엑셀 셀 형태의 상단 고정 네비게이션 */
+.cell-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto; /* 가로 스크롤 허용 */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
+  scrollbar-width: none; /* Firefox 스크롤바 숨김 */
+}
 
-    /* 각 메뉴 항목 (셀) */
-    .cell-item {
-      flex: 1; /* 동일한 비율로 등분 */
-      display: block;
-      padding: 14px 0;
-      font-size: 16px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #000000; /* 셀 배경색과 대비를 위한 검은색 글씨 */
-      text-align: center;
-      box-sizing: border-box;
-      /* 엑셀 경계선 느낌을 주는 미세한 구분선 */
-      border-right: 1px solid rgba(0, 0, 0, 0.1); 
-    }
+.cell-nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari 스크롤바 숨김 */
+}
 
-    .cell-item:last-child {
-      border-right: none;
-    }
+/* 각 메뉴 항목 (셀) */
+.cell-item {
+  flex: 0 0 33.333%; /* 한 화면에 딱 3개씩 보이게 고정 (4개 보이게 하려면 25%) */
+  display: block;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0, 0, 0, 0.1); 
+}
 
     /* 이미지 스타일 */
     img {
