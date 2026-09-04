@@ -41,6 +41,34 @@ body {
   border-right: 1px solid rgba(0, 0, 0, 0.1); 
 }
 
+
+/* 하단 고정 네비게이션 */
+.cell-nav-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5); /* 본문과 구분되는 상단 그림자 효과 */
+}
+
+.cell-nav-bottom::-webkit-scrollbar {
+  display: none;
+}
+
+/* 하단 고정 바로 인해 본문 맨 밑 내용이 가려지지 않도록 여백 확보 */
+body {
+  padding-bottom: 50px; /* 하단 바 높이에 맞춰 조절 */
+}
+
+
 /* 이미지 스타일 */
 img {
   width: 100%;
