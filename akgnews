@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="cell-nav">
+    <a href="http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0" class="cell-item" style="background-color: #ffccaa;">회원가입</a>
+    <a href="https://www.roadmir.com/" class="cell-item" style="background-color: #a3e4d7;">쇼핑몰</a>
+    <a href="https://www.nextstarglobal.com/" class="cell-item" style="background-color: #d7bde2;">AKG란?</a>
+    <a href="https://youtube.com/shorts/cxyL38WZ6ZY?feature=share" class="cell-item" style="background-color: #ffc4d7;">문의</a>
+  </nav>
+
+  <div class="text-box">
+    <div class="text-title" style="font-size: 32px; color: #ffd700;">
+       <a href="shop.html" class="cell-item" style="background-color: ">GENE AKG, 노화의 속도를 늦추는 열쇠가 될 수 있을까!</a>
+    </div>
+    <div class="text-content"></div>
+  </div>
+
+
+
+  <nav class="cell-nav-bottom">
+    <a href="https://www.nextstarglobal.com/" class="cell-item" style="background-color: #ffccaa;">오피스</a>
+    <a href="shop.html" class="cell-item" style="background-color: #a3e4d7;">하단메뉴2</a>
+    <a href="office.html" class="cell-item" style="background-color: #d7bde2;">하단메뉴3</a>
+    <a href="contact.html" class="cell-item" style="background-color: #ffc4d7;">하단메뉴4</a>
+  </nav>
+
+</body>
+</html>
