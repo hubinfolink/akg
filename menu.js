@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // 2. 하단 메뉴 HTML 정의
   const bottomNavHTML = `
     <nav class="cell-nav-bottom">
+      <a href="https://hubinfolink.github.io/akg/" class="cell-item" style="background-color: #a3e4d7;">HOME</a>
       <a href="https://www.nextstarglobal.com/" class="cell-item" style="background-color: #ffccaa;">오피스</a>
-      <a href="shop.html" class="cell-item" style="background-color: #a3e4d7;">하단메뉴2</a>
       <a href="office.html" class="cell-item" style="background-color: #d7bde2;">하단메뉴3</a>
       <a href="contact.html" class="cell-item" style="background-color: #ffc4d7;">하단메뉴4</a>
     </nav>
