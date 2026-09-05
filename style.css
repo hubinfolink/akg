@@ -116,5 +116,5 @@ img {
 img {
   display: block;
   width: 100%;
-  margin-bottom: 1px; /* 1px 틈새 생성 */
+  margin-bottom: 5px; /* 1px 틈새 생성 */
 }
