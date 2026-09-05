@@ -12,7 +12,7 @@
   const bottomMenu = [
     { name: "HOME", link: "https://hubinfolink.github.io/akg/", bg: "#ffccaa", target: "_self" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#a3e4d7", target: "_blank" },
-    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2", target: "_self" }, // 내부 페이지는 현재 창
+    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2", target: "_self" }, 
     { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_blank" }
   ];
 
