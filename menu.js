@@ -2,36 +2,36 @@
 (function () {
   // 상단 메뉴 데이터
   const topMenu = [
-    { name: "무료가입", link: "http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0", bg: "#ffccaa" },
-    { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#a3e4d7" },
-    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2" },
-    { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7" }
+    { name: "무료가입", link: "http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0", bg: "#ffccaa", target: "_blank" },
+    { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#a3e4d7", target: "_blank" },
+    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2", target: "_self" }, // 내부 페이지는 현재 창
+    { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_blank" }
   ];
 
   // 하단 메뉴 데이터
   const bottomMenu = [
-    { name: "HOME", link: "https://hubinfolink.github.io/akg/", bg: "#a3e4d7" },
-    { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#ffccaa" },
-    { name: "하단메뉴3", link: "office.html", bg: "#d7bde2" },
-    { name: "하단메뉴4", link: "contact.html", bg: "#ffc4d7" }
+    { name: "HOME", link: "https://hubinfolink.github.io/akg/", bg: "#a3e4d7", target: "_self" },
+    { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#ffccaa", target: "_blank" },
+    { name: "하단메뉴3", link: "office.html", bg: "#d7bde2", target: "_self" },
+    { name: "하단메뉴4", link: "contact.html", bg: "#ffc4d7", target: "_self" }
   ];
 
   function buildMenu() {
     // 1. 상단 메뉴 렌더링
     const topTargets = document.querySelectorAll('.cell-nav, #top-nav-container');
     topTargets.forEach(el => {
-      el.className = 'cell-nav'; // 클래스명 강제 고정
+      el.className = 'cell-nav';
       el.innerHTML = topMenu.map(m => 
-        `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};">${m.name}</a>`
+        `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};" target="${m.target}" rel="noopener noreferrer">${m.name}</a>`
       ).join('');
     });
 
     // 2. 하단 메뉴 렌더링
     const bottomTargets = document.querySelectorAll('.cell-nav-bottom, #bottom-nav-container');
     bottomTargets.forEach(el => {
-      el.className = 'cell-nav-bottom'; // 클래스명 강제 고정
+      el.className = 'cell-nav-bottom';
       el.innerHTML = bottomMenu.map(m => 
-        `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};">${m.name}</a>`
+        `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};" target="${m.target}" rel="noopener noreferrer">${m.name}</a>`
       ).join('');
     });
   }
