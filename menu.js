@@ -3,9 +3,9 @@
   // 상단 메뉴 데이터
   const topMenu = [
     { name: "무료가입", link: "http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0", bg: "#ffccaa", target: "_blank" },
-    { name: "가입방법", link: "https://www.roadmir.com/", bg: "#a3e4d7", target: "_self" },
+    { name: "가입방법", link: "https://youtu.be/_M-ECEPVK7w", bg: "#a3e4d7", target: "_blank" },
     { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#d7bde2", target: "_blank" },
-    { name: "구매방법", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_self" }
+    { name: "구매방법", link: "https://youtu.be/6tmjm_0Re1w", bg: "#ffc4d7", target: "_blank" }
   ];
 
   // 하단 메뉴 데이터
