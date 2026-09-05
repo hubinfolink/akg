@@ -3,17 +3,17 @@
   // 상단 메뉴 데이터
   const topMenu = [
     { name: "무료가입", link: "http://user.nextstarglobal.com/Account/Register?ref=KRAQ767727-0", bg: "#ffccaa", target: "_blank" },
+    { name: "가입방법", link: "https://www.roadmir.com/", bg: "#a3e4d7", target: "_self" },
     { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#a3e4d7", target: "_blank" },
-    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2", target: "_self" }, // 내부 페이지는 현재 창
-    { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_blank" }
+    { name: "구매방법", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_self" }
   ];
 
   // 하단 메뉴 데이터
   const bottomMenu = [
     { name: "HOME", link: "https://hubinfolink.github.io/akg/", bg: "#a3e4d7", target: "_self" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#ffccaa", target: "_blank" },
-    { name: "하단메뉴3", link: "office.html", bg: "#d7bde2", target: "_self" },
-    { name: "하단메뉴4", link: "contact.html", bg: "#ffc4d7", target: "_self" }
+    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2", target: "_self" }, // 내부 페이지는 현재 창
+    { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_blank" }
   ];
 
   function buildMenu() {
