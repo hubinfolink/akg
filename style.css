@@ -111,3 +111,10 @@ img {
 .text-box a:visited {
   color: #ffffff !important;       /* 방문 후에도 무조건 흰색 유지 */
 }
+
+
+img {
+  display: block;
+  width: 100%;
+  margin-bottom: 1px; /* 1px 틈새 생성 */
+}
