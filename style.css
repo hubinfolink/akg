@@ -123,7 +123,7 @@ img {
 /* 부모 박스 정렬 및 크기 지정 */
 .crossfade-box {
   position: relative;
-  width: 90%;
+  width: 100%;
   max-width: 100%;     /* 너비 초과 방지 */
   margin: 0 auto;      /* 중앙 정렬 핵심 */
   display: block;      /* 블록 요소 명시 */
