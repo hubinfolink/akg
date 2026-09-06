@@ -28,12 +28,12 @@
   // 4. 내부 링크용 쿼리 스트링 (검증된 유효 회원인 경우에만 내부 이동 시 파라미터 유지)
   const internalRefQuery = (userRef && allowedRefs.includes(userRef)) ? `?ref=${userRef}` : '';
 
-  // 상단 메뉴 데이터
+// 상단 메뉴 데이터
   const topMenu = [
     { name: "무료가입", link: `http://user.nextstarglobal.com/Account/Register?ref=${finalRef}`, bg: "#ffccaa", target: "_blank" },
-    { name: "가입방법", link: "https://youtu.be/_M-ECEPVK7w", bg: "#a3e4d7", target: "_blank" },
+    { name: "가입방법", link: `guide_join.html${internalRefQuery}`, bg: "#a3e4d7", target: "_self" },
     { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#d7bde2", target: "_blank" },
-    { name: "구매방법", link: "https://youtu.be/VRTiRY82z6A", bg: "#ffc4d7", target: "_blank" }
+    { name: "구매방법", link: `guide_buy.html${internalRefQuery}`, bg: "#ffc4d7", target: "_self" }
   ];
 
   // 하단 메뉴 데이터
