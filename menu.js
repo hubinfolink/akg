@@ -41,7 +41,7 @@
     { name: "HOME", link: `./${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#a3e4d7", target: "_blank" },
     { name: "AKG란?", link: `akgnews.html${internalRefQuery}`, bg: "#d7bde2", target: "_self" },
-    { name: "문의", link: `contactus.html${internalRefQuery}`, bg: "#ffc4d7", target: "_self" }
+    { name: "문의", link: "https://forms.gle/hy7kk8a9NQT8Lvgt8", bg: "#ffc4d7", target: "_self" }
   ];
 
   function buildMenu() {
