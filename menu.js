@@ -1,14 +1,24 @@
-/* menu.js - 메뉴 소실 문제 완전 해결본 (레퍼럴 자동 변경 추가) */
+/* menu.js - 내부 페이지 이동 시 레퍼럴 유지 기능 추가본 */
 (function () {
   // 1. URL에서 ?ref= 파라미터 값 읽어오기
   const urlParams = new URLSearchParams(window.location.search);
-  const userRef = urlParams.get('ref');
+  let userRef = urlParams.get('ref');
 
-  // 2. 기본 레퍼럴 ID 설정 (보스의 기본 ID)
+  // 2. URL에 ref가 있으면 세션 저장소에 보관하고, 없으면 이전에 저장된 값 꺼내 쓰기
+  if (userRef) {
+    sessionStorage.setItem('saved_ref', userRef);
+  } else {
+    userRef = sessionStorage.getItem('saved_ref');
+  }
+
+  // 3. 기본 레퍼럴 ID 설정 (보스의 기본 ID)
   const defaultRef = "KRAQ767727-0";
 
-  // 3. ref 파라미터가 있으면 그 값을 쓰고, 없으면 기본 보스 ID 사용
+  // 4. 최종 사용할 레퍼럴 ID 결정
   const finalRef = userRef ? userRef : defaultRef;
+
+  // 5. 내부 링크에 붙여줄 쿼리 스트링 (파라미터가 있을 때만 붙임)
+  const internalRefQuery = userRef ? `?ref=${userRef}` : '';
 
   // 상단 메뉴 데이터
   const topMenu = [
@@ -18,11 +28,11 @@
     { name: "구매방법", link: "https://youtu.be/VRTiRY82z6A", bg: "#ffc4d7", target: "_blank" }
   ];
 
-  // 하단 메뉴 데이터
+  // 하단 메뉴 데이터 (내부 페이지 링크 뒤에 ref 파라미터 자동 유지)
   const bottomMenu = [
-    { name: "HOME", link: "index.html", bg: "#ffccaa", target: "_self" },
+    { name: "HOME", link: `index.html${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#a3e4d7", target: "_blank" },
-    { name: "AKG란?", link: "akgnews.html", bg: "#d7bde2", target: "_self" },
+    { name: "AKG란?", link: `akgnews.html${internalRefQuery}`, bg: "#d7bde2", target: "_self" },
     { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_blank" }
   ];
 
