@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>무료 회원가입 안내</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="menu.js"></script>
+  <style>
+    .benefit-box {
+      background: #222;
+      border: 2px solid #ffccaa;
+      border-radius: 12px;
+      padding: 25px 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      text-align: center;
+      color: #fff;
+    }
+    .benefit-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffccaa;
+      margin-bottom: 15px;
+      word-break: keep-all;
+    }
+    .benefit-desc {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 25px;
+      word-break: keep-all;
+    }
+    .btn-register-action {
+      display: block;
+      width: 100%;
+      padding: 16px 0;
+      background: #ffccaa;
+      color: #111;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(255, 204, 170, 0.3);
+      transition: transform 0.2s;
+    }
+    .btn-register-action:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 메뉴 -->
+  <nav class="cell-nav"></nav>
+
+  <div class="text-box">
+    <div class="text-title">AKG 무료 회원가입 특별 혜택</div>
+  </div>
+
+  <div class="benefit-box">
+    <div class="benefit-title">🎁 지금 가입하시면 나만의 홍보 페이지가 공짜!</div>
+    <div class="benefit-desc">
+      망설이지 말고 선점하세요.<br>
+      무료 가입 완료 후 문의해 주시면,<br>
+      <strong>지금 보고 계신 프리미엄 랜딩페이지</strong>에<br>
+      회원님의 전용 추천인 ID를 매핑하여 <strong>100% 무료로 발급</strong>해 드립니다.
+    </div>
+    <a id="btn-real-register" href="#" target="_blank" class="btn-register-action">👉 혜택받고 무료 가입하러 가기</a>
+  </div>
+
+  <!-- 하단 메뉴 -->
+  <nav class="cell-nav-bottom"></nav>
+
+  <script>
+    (function() {
+      // menu.js에서 검증 완료된 finalRef를 활용하여 진짜 가입 링크 생성
+      const urlParams = new URLSearchParams(window.location.search);
+      const userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref') || "KRAQ767727-0";
+
+      const realRegisterBtn = document.getElementById('btn-real-register');
+      if (realRegisterBtn) {
+        realRegisterBtn.href = `http://user.nextstarglobal.com/Account/Register?ref=${userRef}`;
+      }
+    })();
+  </script>
+</body>
+</html>
