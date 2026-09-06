@@ -30,7 +30,7 @@
 
   // 하단 메뉴 데이터 (내부 페이지 링크 뒤에 ref 파라미터 자동 유지)
   const bottomMenu = [
-    { name: "HOME", link: `./`, bg: "#ffccaa", target: "_self" },
+    { name: "HOME", link: `./${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#a3e4d7", target: "_blank" },
     { name: "AKG란?", link: `akgnews.html${internalRefQuery}`, bg: "#d7bde2", target: "_self" },
     { name: "문의", link: "https://t.me/gene_akg_bot", bg: "#ffc4d7", target: "_blank" }
