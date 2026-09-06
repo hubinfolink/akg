@@ -115,14 +115,14 @@ img {
 
 img {
   display: block;
-  width: 100%;
+  width: 90%;
   margin-bottom: 5px; /* 1px 틈새 생성 */
 }
 
 /* 여기서부터 이미지 교차 */
 .crossfade-box {
   position: relative;
-  width: 100%;
+  width: 90%;
 }
 .crossfade-box img {
   width: 90%;
