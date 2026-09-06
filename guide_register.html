@@ -17,20 +17,6 @@
       text-align: center;
       color: #fff;
     }
-    .benefit-title {
-      font-size: 20px;
-      font-weight: bold;
-      color: #ffccaa;
-      margin-bottom: 15px;
-      word-break: keep-all;
-    }
-    .benefit-desc {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #ddd;
-      margin-bottom: 25px;
-      word-break: keep-all;
-    }
     .btn-register-action {
       display: block;
       width: 100%;
@@ -69,8 +55,8 @@
       <strong>지금 보고 계신 프리미엄 랜딩페이지</strong>에<br>
       회원님의 전용 추천인 ID를 매핑하여 <strong><br>
       100% 무료로 발급</strong>해 드립니다.
+    </div>
   </div>
-
 
   <div class="benefit-box">
     <a id="btn-real-register" href="#" target="_blank" class="btn-register-action">🎁 혜택받고 무료 가입하러 가기</a>
@@ -81,13 +67,23 @@
 
   <script>
     (function() {
-      // menu.js에서 검증 완료된 finalRef를 활용하여 진짜 가입 링크 생성
-      const urlParams = new URLSearchParams(window.location.search);
-      const userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref') || "KRAQ767727-0";
+      // menu.js 화이트리스트 기준 동기화
+      const defaultRef = "KRAQ767727-0";
+      const allowedRefs = ["KRAQ917863-0"];
 
+      const urlParams = new URLSearchParams(window.location.search);
+      let userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref');
+
+      // 화이트리스트 검증 (menu.js와 동일 조건)
+      let finalRef = defaultRef;
+      if (userRef && allowedRefs.includes(userRef)) {
+        finalRef = userRef;
+      }
+
+      // 최종 검증된 ID로 가입 링크 연결
       const realRegisterBtn = document.getElementById('btn-real-register');
       if (realRegisterBtn) {
-        realRegisterBtn.href = `http://user.nextstarglobal.com/Account/Register?ref=${userRef}`;
+        realRegisterBtn.href = `http://user.nextstarglobal.com/Account/Register?ref=${finalRef}`;
       }
     })();
   </script>
