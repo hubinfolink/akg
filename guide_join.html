@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가입방법 안내</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="menu.js"></script>
+  <style>
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 비율 유지 */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 20px 0;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 메뉴 -->
+  <nav class="cell-nav"></nav>
+
+  <div class="text-box">
+    <div class="text-title">AKG 회원가입 방법 안내</div>
+  </div>
+
+  <!-- 유튜브 iframe 동영상 영역 -->
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/_M-ECEPVK7w" allowfullscreen></iframe>
+  </div>
+
+  <!-- 하단 메뉴 -->
+  <nav class="cell-nav-bottom"></nav>
+
+  <script src="menu.js"></script>
+</body>
+</html>
