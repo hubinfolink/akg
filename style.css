@@ -118,3 +118,29 @@ img {
   width: 100%;
   margin-bottom: 5px; /* 1px 틈새 생성 */
 }
+
+/* 여기서부터 이미지 교차 */
+.crossfade-box {
+  position: relative;
+  width: 100%;
+  max-width: 600px; /* 원하는 너비로 수정 */
+}
+.crossfade-box img {
+  width: 100%;
+  display: block;
+}
+.crossfade-box .img-b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 전체 1회 주기는 4초 (A 2초 + B 2초) */
+  animation: xfade 4s infinite ease-in-out;
+}
+
+@keyframes xfade {
+  0%   { opacity: 0; }  /* [0s~1.5s] A 이미지 보임 */
+  37.5% { opacity: 0; }
+  50%  { opacity: 1; }  /* [1.5s~2s] B 이미지를 0.5초 만에 페이드인 */
+  87.5% { opacity: 1; }  /* [2s~3.5s] B 이미지 보임 */
+  100% { opacity: 0; }  /* [3.5s~4s] A 이미지를 0.5초 만에 페이드아웃 */
+}
