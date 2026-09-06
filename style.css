@@ -118,39 +118,3 @@ img {
   width: 90%;
   margin-bottom: 5px; /* 1px 틈새 생성 */
 }
-
-/* 여기서부터 이미지 교차 */
-/* 부모 박스 정렬 및 크기 지정 */
-.crossfade-box {
-  position: relative;
-  width: 100%;
-  max-width: 100%;     /* 너비 초과 방지 */
-  margin: 0 auto;      /* 중앙 정렬 핵심 */
-  display: block;      /* 블록 요소 명시 */
-  overflow: hidden;    /* 미세하게 튀어나오는 이미지 잘라내기 */
-}
-
-/* 내부 이미지 공통 속성 */
-.crossfade-box img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* 절대 위치 레이어 이미지 */
-.crossfade-box .img-b {
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* 전체 1회 주기는 4초 (A 2초 + B 2초) */
-  animation: xfade 4s infinite ease-in-out;
-}
-
-@keyframes xfade {
-  0%   { opacity: 0; }  /* [0s~1.5s] A 이미지 보임 */
-  37.5% { opacity: 0; }
-  50%  { opacity: 1; }  /* [1.5s~2s] B 이미지를 0.5초 만에 페이드인 */
-  87.5% { opacity: 1; }  /* [2s~3.5s] B 이미지 보임 */
-  100% { opacity: 0; }  /* [3.5s~4s] A 이미지를 0.5초 만에 페이드아웃 */
-}
