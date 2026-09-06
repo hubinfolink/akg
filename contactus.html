@@ -12,7 +12,7 @@
 
 <!-- 상단 메뉴 자리 -->
   <nav class="cell-nav"></nav>
-<br>
+<br><img src="images/22.jpg" style="width: 70%;">
 
   <div class="text-box">
     <div>
@@ -43,8 +43,13 @@
     let userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref') || "KRAQ767727-0";
 
     // 2. 텔레그램 딥링크 조립
+	// contactus.html 내 텔레그램 버튼 세팅 방식 변경
     const tgBtn = document.getElementById('btn-telegram');
-    if (tgBtn) tgBtn.href = `https://t.me/gene_akg_bot?start=ref_${userRef}`;
+
+    // 유저가 텔레그램으로 진입 시 'start' 파라미터에 레퍼럴 ID 전달
+    if (tgBtn) {
+      tgBtn.href = `https://t.me/gene_akg_bot?start=${userRef}`;
+    }
 
     // 3. 문자(SMS) 자동 완성 링크 조립 (보스 번호 세팅)
     const smsBtn = document.getElementById('btn-sms');
