@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AKG</title>
-<link rel="stylesheet" href="style.css">
+  <title>AKG 문의하기</title>
+  <link rel="stylesheet" href="style.css">
   <!-- 메뉴 공통 스크립트 연결 -->
   <script src="menu.js"></script>
 </head>
 <body>
 
-<!-- 상단 메뉴 자리 -->
+  <!-- 상단 메뉴 자리 -->
   <nav class="cell-nav"></nav>
 
   <div class="text-box">
@@ -22,8 +22,7 @@
 
   <div class="text-box">
     <div>
-	<a id="btn-kakao" href="https://open.kakao.com/o/sBOSS_KAKAO" target="_blank" class="btn btn-kakao">카카오톡으로 문의하기</a>
-       </a>
+       <a id="btn-kakao" href="https://open.kakao.com/o/sBOSS_KAKAO" target="_blank" class="btn btn-kakao">카카오톡으로 문의하기</a>
     </div>
     <div class="text-content"></div>
   </div>
@@ -37,36 +36,31 @@
 
 <script>
   (function() {
-    // 1. URL 및 세션에서 레퍼럴 읽기
-// contactus.html 내부 스크립트
-const tgBtn = document.getElementById('btn-telegram');
+    // 1. URL 및 세션에서 레퍼럴 ID 읽어오기 (없으면 보스 기본 ID)
+    const urlParams = new URLSearchParams(window.location.search);
+    const userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref') || "KRAQ767727-0";
 
-// 보스 개인 텔레그램 아이디 세팅 (예: gene_boss)
-const bossTelegramId = "cuntting"; 
-const msg = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
+    // 2. 텔레그램 링크 조립 (보스 개인 계정으로 자동 입력 문구 포함 연결)
+    const tgBtn = document.getElementById('btn-telegram');
+    const bossTelegramId = "cuntting"; // 보스 개인 텔레그램 아이디
+    const tgMsg = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
 
-if (tgBtn) {
-  // 클릭 시 보스 개인 텔레그램으로 자동 문구와 함께 이동
-  tgBtn.href = `https://t.me/${bossTelegramId}?text=${msg}`;
-}
-    // 유저가 텔레그램으로 진입 시 'start' 파라미터에 레퍼럴 ID 전달
     if (tgBtn) {
-      tgBtn.href = `https://t.me/gene_akg_bot?start=${userRef}`;
+      tgBtn.href = `https://t.me/${bossTelegramId}?text=${tgMsg}`;
     }
 
-    // 3. 문자(SMS) 자동 완성 링크 조립 (보스 번호 세팅)
+    // 3. 문자(SMS) 자동 완성 링크 조립 (보스 수신 전용 번호 세팅)
     const smsBtn = document.getElementById('btn-sms');
-    const bossPhone = "01012345678"; // 보스 수신 전용 번호
-    const smsText = encodeURIComponent(`[AKG 문의] 추천인코드(${userRef}) 안내를 받고 문의드립니다.`);
+    const bossPhone = "01012345678"; // 보스 실제 핸드폰 번호로 변경 필요
+    const smsText = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
 
     if (smsBtn) {
-      // iOS와 안드로이드 호환 문자 링크
       smsBtn.href = `sms:${bossPhone}?body=${smsText}`;
     }
   })();
 </script>
 
-<!-- 하단 메뉴 자리 -->
+  <!-- 하단 메뉴 자리 -->
   <nav class="cell-nav-bottom"></nav>
 
   <!-- 메뉴 자동 삽입 스크립트 (맨 아래 배치) -->
