@@ -30,7 +30,7 @@
 
 // 상단 메뉴 데이터
   const topMenu = [
-    { name: "무료가입", link: `http://user.nextstarglobal.com/Account/Register?ref=${finalRef}`, bg: "#ffccaa", target: "_blank" },
+    { name: "무료가입", link: `guide_register.html${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
     { name: "가입방법", link: `guide_join.html${internalRefQuery}`, bg: "#a3e4d7", target: "_self" },
     { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#d7bde2", target: "_blank" },
     { name: "구매방법", link: `guide_buy.html${internalRefQuery}`, bg: "#ffc4d7", target: "_self" }
