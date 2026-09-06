@@ -120,16 +120,25 @@ img {
 }
 
 /* 여기서부터 이미지 교차 */
+/* 부모 박스 정렬 및 크기 지정 */
 .crossfade-box {
   position: relative;
-  width: 90%;          /* 전체 너비 90% */
-  margin: 0 auto;      /* 부모 박스를 화면 중앙에 배치 */
+  width: 90%;
+  max-width: 100%;     /* 너비 초과 방지 */
+  margin: 0 auto;      /* 중앙 정렬 핵심 */
+  display: block;      /* 블록 요소 명시 */
+  overflow: hidden;    /* 미세하게 튀어나오는 이미지 잘라내기 */
 }
 
+/* 내부 이미지 공통 속성 */
 .crossfade-box img {
-  width: 100%;         /* 부모 박스(90%) 크기에 꽉 채움 */
+  width: 100%;
+  height: auto;
   display: block;
+  margin: 0 auto;
 }
+
+/* 절대 위치 레이어 이미지 */
 .crossfade-box .img-b {
   position: absolute;
   top: 0;
