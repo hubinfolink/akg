@@ -12,6 +12,7 @@
 
 <!-- 상단 메뉴 자리 -->
   <nav class="cell-nav"></nav>
+<br><img src="images/22.jpg" style="width: 70%;">
 
   <div class="text-box">
     <div>
@@ -30,7 +31,7 @@
 
   <div class="text-box">
     <div>
-       <a id="btn-sms" href="#" class="btn btn-sms">문자로 문의하기</a>
+       <a id="btn-sms" href="#" class="btn btn-sms">문자로 문의하기 (어르신 전용)</a>
     </div>
     <div class="text-content"></div>
   </div>
@@ -38,13 +39,17 @@
 <script>
   (function() {
     // 1. URL 및 세션에서 레퍼럴 읽기
-    const urlParams = new URLSearchParams(window.location.search);
-    let userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref') || "KRAQ767727-0";
+// contactus.html 내부 스크립트
+const tgBtn = document.getElementById('btn-telegram');
 
-    // 2. 텔레그램 딥링크 조립
-	// contactus.html 내 텔레그램 버튼 세팅 방식 변경
-    const tgBtn = document.getElementById('btn-telegram');
+// 보스 개인 텔레그램 아이디 세팅 (예: gene_boss)
+const bossTelegramId = "@cuntting"; 
+const msg = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
 
+if (tgBtn) {
+  // 클릭 시 보스 개인 텔레그램으로 자동 문구와 함께 이동
+  tgBtn.href = `https://t.me/${bossTelegramId}?text=${msg}`;
+}
     // 유저가 텔레그램으로 진입 시 'start' 파라미터에 레퍼럴 ID 전달
     if (tgBtn) {
       tgBtn.href = `https://t.me/gene_akg_bot?start=${userRef}`;
