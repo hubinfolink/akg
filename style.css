@@ -1,5 +1,16 @@
-/* style.css - 원본 보존 및 menu.css 불러오기 */
+/* style.css - 원본 보존, menu.css 불러오기 및 글자 크기 중앙 통제 */
 @import url('menu.css');
+
+:root {
+  /* =========================================================
+     [글자 크기 조절 옵션 - 보스가 여기서 변경!]
+     18px : 기본 크기
+     20px : 약간 크게
+     22px : 버튼에 시원하게 꽉 차는 크기 (추천)
+     24px : 모바일 화면 한계까지 최대 꽉 차는 크기
+     ========================================================= */
+  --menu-font-size: 26px;
+}
 
 body {
   margin: 0;
@@ -8,7 +19,7 @@ body {
   text-align: center;
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  padding-bottom: 70px !important; /* 하단 메뉴 공간 확보 */
+  padding-bottom: 75px !important; /* 하단 메뉴 공간 확보 */
 }
 
 /* 상단 고정 네비게이션 */
@@ -19,7 +30,7 @@ body {
   display: flex !important;
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 6px 4px !important; /* 패딩 감소로 버튼 영역 확대 */
   box-sizing: border-box;
 }
 
@@ -32,27 +43,31 @@ body {
   z-index: 9999;
   display: flex !important;
   margin: 0;
-  padding: 0;
+  padding: 6px 4px !important; /* 패딩 감소로 버튼 영역 확대 */
   box-sizing: border-box;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* [핵심] 상단 및 하단 공통 셀 아이템 - 화면 전체 폭 N등분 자동 균등 분배 */
+/* [핵심] 상단 및 하단 공통 셀 아이템 - 글자 꽉 차게 설정 */
 .cell-nav .cell-item,
 .cell-nav-bottom .cell-item {
-  flex: 1 1 0px !important; /* 최소 너비 없이 무조건 N등분 */
-  width: 0 !important;       /* 모바일 사파리 글자 밀림 방지 */
-  min-width: 0 !important;   /* 텍스트 길어짐으로 인한 가로 밀림 방지 */
+  flex: 1 1 0px !important;
+  width: 0 !important;
+  min-width: 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
-  font-weight: bold;
+  
+  /* 전역 변수 글자 크기 적용 */
+  font-size: var(--menu-font-size) !important;
+  font-weight: 900 !important; /* 글자 두께 극대화 */
+  letter-spacing: -1px; /* 글자 간격 살짝 줄여 꽉 차는 느낌 연출 */
+  
   text-decoration: none;
-  color: #000000;
   text-align: center;
   box-sizing: border-box;
   word-break: keep-all;
+  white-space: nowrap;
 }
 
 /* 이미지 스타일 */
@@ -92,17 +107,16 @@ img {
 
 /* 텍스트 박스 내 링크 스타일 설정 */
 .text-box a {
-  color: #ffffff !important;       /* 글자색 흰색 고정 */
-  text-decoration: none;           /* 밑줄 제거 */
-  font-size: 24px;                  /* 원본 24px 유지 */
-  font-weight: bold;               /* 가독성을 위한 두껍게 처리 */
-  display: block;                  /* 클릭 영역 확대 */
-  word-break: keep-all;            /* 모바일에서 단어 단위 줄바꿈 처리 */
+  color: #ffffff !important;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+  word-break: keep-all;
 }
 
-/* 마우스 오버 또는 클릭 시 */
 .text-box a:hover, 
 .text-box a:active, 
 .text-box a:visited {
-  color: #ffffff !important;       /* 방문 후에도 무조건 흰색 유지 */
+  color: #ffffff !important;
 }
