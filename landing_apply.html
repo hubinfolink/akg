@@ -12,68 +12,55 @@
       margin: 20px auto;
       padding: 0 10px;
     }
-    .form-wrapper {
-      width: 100%;
-      background: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 12px;
-      padding: 25px 20px;
-      box-sizing: border-box;
-      color: #fff;
-      margin-top: 20px;
-    }
-    .form-title {
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
-      color: #ffccaa;
-      border-bottom: 1px solid #333;
-      padding-bottom: 15px;
-    }
+
+    /* 기존 .text-title / .text-content 폰트 스펙과 동일하게 통일 */
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      text-align: left;
     }
     .form-group label {
       display: block;
-      font-size: 14px;
+      /* 상단 제목 타이틀급 크기로 설정해 시원하게 보이도록 지정 */
+      font-size: 22px; 
       font-weight: bold;
-      margin-bottom: 6px;
-      color: #ddd;
+      margin-bottom: 8px;
+      color: #ffccaa;
     }
     .form-group label .required {
       color: #ff5555;
-      margin-left: 3px;
+      margin-left: 4px;
     }
     .form-group input {
       width: 100%;
-      padding: 12px;
-      background: #2a2a2a;
-      border: 1px solid #444;
-      border-radius: 6px;
+      padding: 14px;
+      background: #111;
+      border: 2px solid #ffccaa;
+      border-radius: 8px;
       color: #fff;
-      font-size: 15px;
+      /* 모바일 노안 대책: 입력 글자도 22px로 매우 크게 설정 */
+      font-size: 22px; 
       box-sizing: border-box;
+      font-weight: bold;
     }
     .form-group input:focus {
       outline: none;
-      border-color: #ffccaa;
+      border-color: #ffffff;
+      background: #000;
     }
     .form-group input[readonly] {
-      background: #111;
-      color: #ffccaa;
-      font-weight: bold;
-      border-color: #333;
+      background: #222;
+      color: #aaa;
+      border-color: #444;
       cursor: not-allowed;
     }
     .btn-submit {
       width: 100%;
-      padding: 14px;
+      padding: 18px;
       background: #ffccaa;
       color: #111;
       border: none;
-      border-radius: 6px;
-      font-size: 17px;
+      border-radius: 8px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
@@ -107,16 +94,16 @@
     <!-- 상단 레퍼럴 ID 표시 및 복사 바 -->
     <div class="text-box">
       🔗 상위 추천인 ID :
-      <div id="referral-display-bar" style="background: #111; color: #ffccaa; text-align: center; padding: 10px; font-size: 26px; border-bottom: 1px solid #ffccaa; word-break: break-all; display: flex; align-items: center; justify-content: center; gap: 8px;">
+      <div id="referral-display-bar" style="background: #111; color: #ffccaa; text-align: center; padding: 10px; font-size: 26px; border-bottom: 1px solid #ffccaa; word-break: break-all; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
         <span><strong id="current-ref-id" style="color: #fff;"></strong></span>
-        <button id="btn-copy-ref" style="background: #ffccaa; color: #111; border: none; padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer;">복사</button>
+        <button id="btn-copy-ref" style="background: #ffccaa; color: #111; border: none; padding: 6px 12px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer;">복사</button>
       </div>
     </div>
 
-    <!-- 자체 HTML 신청 폼 영역 (아이프레임 대체) -->
-    <div class="form-wrapper">
-      <div class="form-title">📝 랜딩페이지 무료 신청서</div>
-
+    <!-- 기존 .text-box 내부에 신청서 통합 (레이아웃 및 CSS 완벽 공유) -->
+    <div class="text-box">
+      <div class="text-title" style="margin-bottom: 25px;">📝 랜딩페이지 무료 신청서</div>
+      
       <form id="applyForm">
         <!-- 1. 상위 파트너 ID (수정 불가 고정) -->
         <div class="form-group">
@@ -160,7 +147,7 @@
       const targetRef = window.FINAL_REF || 'KRAQ767727-0';
 
       if (refSpan) refSpan.textContent = targetRef;
-      if (parentRefInput) parentRefInput.value = targetRef; // 폼의 읽기전용 입력창에도 주입
+      if (parentRefInput) parentRefInput.value = targetRef;
 
       if (copyBtn) {
         copyBtn.addEventListener('click', function() {
@@ -180,7 +167,7 @@
       applyForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        // 1단계에서 생성한 구글 웹 앱 URL 주소 입력
+        // 구글 웹 앱 URL 주소 입력
         const GAS_URL = "https://script.google.com/macros/s/AKfycbz7AyM8Qy5COE3VLhzmAaUSGSBw1Mq4XupVVUdvatwLvHS6YIV4olnIg_G9M8OJziZq/exec";
 
         if (GAS_URL.includes("여기에_구글")) {
