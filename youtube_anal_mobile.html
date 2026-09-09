@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>YT Analytics Mobile</title>
+    <title>YT Analytics Mobile (Boss Custom)</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -11,16 +11,26 @@
     <style>
         body { -webkit-tap-highlight-color: transparent; }
         .key-input-wrapper { transition: all 0.3s ease; max-height: 0; opacity: 0; overflow: hidden; }
-        .key-input-wrapper.open { max-height: 50px; opacity: 1; margin-top: 8px; }
+        .key-input-wrapper.open { max-height: 60px; opacity: 1; margin-top: 8px; }
         .quick-btn { transition: all 0.15s; }
         .quick-btn:active { transform: scale(0.95); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans selection:bg-red-500 pb-10">
+<body class="bg-slate-900 text-slate-100 font-sans selection:bg-red-500 pb-12">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
+
+        /* =========================================================================
+           [보스 전용 글자 크기 조절]
+           이 숫자만 18px, 20px, 22px, 24px 등으로 바꿔서 비교해봐.
+           모든 버튼, 입력창, 제목, 조회수 글씨가 이 비율에 맞춰 자동으로 커짐!
+           ========================================================================= */
+        const BASE_FONT_SIZE = '20px';
+        /* ========================================================================= */
 
         const DEFAULT_API_KEY = 'AIzaSyBBOrShpnWuTF-W2dfJI1AorYJhORtW0z4';
         const REGIONS = [{ code: 'KR', name: 'KR' }, { code: 'US', name: 'US' }, { code: 'JP', name: 'JP' }, { code: 'GB', name: 'UK' }];
@@ -90,7 +100,6 @@
                         items = vData.items || [];
                     }
 
-                    // 필수 데이터만 추출 후 조회수 내림차순 고정 정렬
                     const parsedList = items.map(item => ({
                         id: item.id.videoId || item.id,
                         title: item.snippet.title,
@@ -123,29 +132,29 @@
             };
 
             return (
-                <div className="p-3 max-w-md mx-auto min-h-screen relative">
+                <div style={{ fontSize: BASE_FONT_SIZE }} className="p-3 max-w-lg mx-auto min-h-screen relative leading-relaxed">
 
-                    {/* 상단 핀 컨트롤러 */}
-                    <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md pb-2 pt-1 border-b border-slate-800">
-                        {/* API 키 & 국가/카테고리 설정 바 */}
+                    {/* 상단 컨트롤러 */}
+                    <header className="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md pb-3 pt-2 border-b border-slate-800">
+                        {/* API / 트렌드 / 국적 설정 */}
                         <div className="flex items-center justify-between gap-2 mb-2">
-                            <div className="flex items-center gap-1.5">
+                            <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => setIsKeyOpen(!isKeyOpen)}
-                                    className={`p-2 rounded-lg text-xs font-bold flex items-center gap-1 ${apiKey ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-red-600 text-white animate-pulse'}`}
+                                    className={`p-2 rounded-xl font-bold flex items-center gap-1 ${apiKey ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-red-600 text-white animate-pulse'}`}
                                 >
-                                    <Icon name="Key" className="w-4 h-4" /> API
+                                    <Icon name="Key" className="w-5 h-5" /> API
                                 </button>
-                                <select value={trendRegion} onChange={e => setTrendRegion(e.target.value)} className="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-bold text-blue-400 focus:outline-none">
+                                <select value={trendRegion} onChange={e => setTrendRegion(e.target.value)} className="bg-slate-800 border border-slate-700 rounded-xl p-2 font-bold text-blue-400 focus:outline-none">
                                     {REGIONS.map(r => <option key={r.code} value={r.code}>{r.name}</option>)}
                                 </select>
-                                <select value={trendCategory} onChange={e => setTrendCategory(e.target.value)} className="bg-slate-800 border border-slate-700 rounded-lg px-2 py-1.5 text-xs font-bold text-blue-400 focus:outline-none">
+                                <select value={trendCategory} onChange={e => setTrendCategory(e.target.value)} className="bg-slate-800 border border-slate-700 rounded-xl p-2 font-bold text-blue-400 focus:outline-none">
                                     {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                                 </select>
                             </div>
 
-                            <button onClick={() => fetchData('trends')} className="bg-red-600 active:bg-red-700 text-white px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1 active:scale-95 shadow-md">
-                                <Icon name="TrendingUp" className="w-4 h-4" /> 트렌드
+                            <button onClick={() => fetchData('trends')} className="bg-red-600 active:bg-red-700 text-white px-3 py-2 rounded-xl font-black flex items-center gap-1 active:scale-95 shadow">
+                                <Icon name="TrendingUp" className="w-5 h-5" /> 트렌드
                             </button>
                         </div>
 
@@ -153,7 +162,7 @@
                         <div className={`key-input-wrapper ${isKeyOpen ? 'open' : ''}`}>
                             <input
                                 type="text"
-                                className="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-xs w-full text-emerald-400 font-mono focus:outline-none"
+                                className="bg-slate-800 border border-slate-700 rounded-xl p-2 text-emerald-400 font-mono w-full focus:outline-none"
                                 placeholder="Paste API Key..."
                                 value={apiKey}
                                 onChange={(e) => saveApiKey(e.target.value)}
@@ -161,12 +170,12 @@
                         </div>
 
                         {/* 키워드 태그 스크롤 */}
-                        <div className="flex overflow-x-auto gap-1.5 no-scrollbar py-1 mb-2 border-y border-slate-800/80">
+                        <div className="flex overflow-x-auto gap-2 no-scrollbar py-2 mb-2 border-y border-slate-800">
                             {['뉴스', '이슈', '트럼프', '살해', '사망', '영어단어', '명언', '경제학', '건강정보', '심리학'].map(label => (
                                 <button
                                     key={label}
                                     onClick={() => { setSearchQuery(label); setQuickDate('1주일', 7); fetchData('search', label); }}
-                                    className="quick-btn shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-md text-xs font-medium border border-slate-700/50"
+                                    className="quick-btn shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-200 px-3 py-1.5 rounded-xl font-bold border border-slate-700/50"
                                 >
                                     {label}
                                 </button>
@@ -174,13 +183,13 @@
                         </div>
 
                         {/* 옵션 세팅 (숏폼/기간) */}
-                        <div className="flex items-center justify-between gap-1 mb-2">
-                            <div className="flex bg-slate-800 p-0.5 rounded-lg border border-slate-700 shrink-0">
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex bg-slate-800 p-1 rounded-xl border border-slate-700 shrink-0">
                                 {['short', 'medium', 'any'].map(v => (
                                     <button
                                         key={v}
                                         onClick={() => setVideoType(v)}
-                                        className={`px-2.5 py-1 rounded-md text-[11px] font-bold transition-all ${videoType === v ? 'bg-red-600 text-white shadow' : 'text-slate-400'}`}
+                                        className={`px-3 py-1 rounded-lg font-black transition-all ${videoType === v ? 'bg-red-600 text-white shadow' : 'text-slate-400'}`}
                                     >
                                         {v === 'short' ? '숏폼' : v === 'medium' ? '롱폼' : '모두'}
                                     </button>
@@ -192,7 +201,7 @@
                                     <button
                                         key={p.l}
                                         onClick={() => setQuickDate(p.l, p.d)}
-                                        className={`px-2 py-1 rounded-md text-[11px] font-bold ${activePeriod === p.l ? 'bg-slate-200 text-slate-900' : 'bg-slate-800 text-slate-400 border border-slate-700/50'}`}
+                                        className={`px-2.5 py-1 rounded-lg font-bold ${activePeriod === p.l ? 'bg-slate-200 text-slate-900' : 'bg-slate-800 text-slate-400 border border-slate-700/50'}`}
                                     >
                                         {p.l}
                                     </button>
@@ -200,64 +209,62 @@
                             </div>
                         </div>
 
-                        {/* 검색창 & 카피 */}
-                        <div className="flex gap-1.5">
-                            <div className="relative flex-1">
-                                <input
-                                    type="text"
-                                    className="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl pl-3 pr-8 py-2 text-sm focus:outline-none focus:border-red-500 font-bold"
-                                    placeholder="검색어 입력..."
-                                    value={searchQuery}
-                                    onChange={e => setSearchQuery(e.target.value)}
-                                    onKeyDown={e => e.key === 'Enter' && fetchData('search')}
-                                />
-                            </div>
-                            <button onClick={() => fetchData('search')} className="bg-red-600 active:bg-red-700 text-white px-4 py-2 rounded-xl font-bold text-sm active:scale-95 shadow">
+                        {/* 검색창 & 복사 버튼 */}
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                className="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3 py-2 focus:outline-none focus:border-red-500 font-bold"
+                                placeholder="검색어 입력..."
+                                value={searchQuery}
+                                onChange={e => setSearchQuery(e.target.value)}
+                                onKeyDown={e => e.key === 'Enter' && fetchData('search')}
+                            />
+                            <button onClick={() => fetchData('search')} className="bg-red-600 active:bg-red-700 text-white px-4 py-2 rounded-xl font-black active:scale-95 shrink-0 shadow">
                                 검색
                             </button>
-                            <button onClick={handleCopyTitles} className="bg-blue-600 active:bg-blue-700 text-white px-3 py-2 rounded-xl font-bold active:scale-95 shadow">
-                                <Icon name="Copy" className="w-4 h-4" />
+                            <button onClick={handleCopyTitles} className="bg-blue-600 active:bg-blue-700 text-white px-3 py-2 rounded-xl font-black active:scale-95 shrink-0 shadow">
+                                <Icon name="Copy" className="w-6 h-6" />
                             </button>
                         </div>
                     </header>
 
-                    {/* 모바일 최적화 피드형 리스트 (조회수순 고정) */}
-                    <main className="mt-3 space-y-2.5">
+                    {/* 피드 리스트 */}
+                    <main className="mt-4 space-y-3">
                         {loading && (
-                            <div className="py-12 text-center text-slate-400 font-bold text-sm">
+                            <div className="py-16 text-center text-slate-400 font-bold">
                                 로딩 중...
                             </div>
                         )}
 
                         {!loading && videos.length === 0 && (
-                            <div className="py-16 text-center text-slate-500 font-bold text-sm">
+                            <div className="py-20 text-center text-slate-500 font-bold">
                                 Wait for Command, Boss.
                             </div>
                         )}
 
                         {!loading && videos.map((v, index) => (
-                            <div key={v.id} className="bg-slate-800/80 border border-slate-700/60 rounded-xl p-2.5 flex gap-3 items-center active:bg-slate-800 transition-colors">
+                            <div key={v.id} className="bg-slate-800/90 border border-slate-700 rounded-2xl p-3 flex gap-3 items-center active:bg-slate-800 transition-colors shadow-md">
                                 {/* 썸네일 */}
-                                <a href={`https://youtu.be/${v.id}`} target="_blank" className="relative w-28 h-16 shrink-0 rounded-lg overflow-hidden bg-slate-900 border border-slate-700/50">
+                                <a href={`https://youtu.be/${v.id}`} target="_blank" className="relative w-36 h-20 shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-slate-700/60">
                                     <img src={v.thumb} className="w-full h-full object-cover" alt="thumb" />
-                                    <span className="absolute top-0.5 left-0.5 bg-black/70 text-amber-400 font-black text-[9px] px-1 rounded">
+                                    <span className="absolute top-1 left-1 bg-black/80 text-amber-400 font-black px-1.5 py-0.5 rounded-md text-[0.7em]">
                                         #{index + 1}
                                     </span>
                                 </a>
 
-                                {/* 요약 정보 */}
-                                <div className="flex-1 min-w-0 flex flex-col justify-between h-16">
-                                    <a href={`https://youtu.be/${v.id}`} target="_blank" className="font-bold text-slate-100 text-xs line-clamp-2 leading-snug">
+                                {/* 동영상 정보 */}
+                                <div className="flex-1 min-w-0 flex flex-col justify-between h-20 py-0.5">
+                                    <a href={`https://youtu.be/${v.id}`} target="_blank" className="font-bold text-slate-100 line-clamp-2 leading-snug text-[0.9em]">
                                         {v.title}
                                     </a>
 
-                                    <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
-                                        <span className="truncate max-w-[100px] text-slate-400 font-medium">{v.channelTitle}</span>
+                                    <div className="flex items-center justify-between text-[0.75em] text-slate-400">
+                                        <span className="truncate max-w-[110px] text-slate-400 font-medium">{v.channelTitle}</span>
                                         <div className="flex items-center gap-1.5 shrink-0">
-                                            <span className="font-black text-red-400 bg-red-950/40 px-1.5 py-0.5 rounded border border-red-800/30">
+                                            <span className="font-black text-red-400 bg-red-950/60 px-2 py-0.5 rounded-lg border border-red-800/40">
                                                 {v.views.toLocaleString()}회
                                             </span>
-                                            <span className="text-[10px] text-slate-500">{v.vDate.slice(2)}</span>
+                                            <span className="text-slate-500">{v.vDate.slice(2)}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -268,9 +275,9 @@
                     {/* 플로팅 탑 버튼 */}
                     <button
                         onClick={scrollToTop}
-                        className="fixed bottom-4 right-4 z-50 bg-red-600 text-white p-3 rounded-full shadow-lg active:scale-90 border border-white/20"
+                        className="fixed bottom-6 right-6 z-50 bg-red-600 text-white p-4 rounded-full shadow-2xl active:scale-90 border-2 border-white/20"
                     >
-                        <Icon name="ArrowUp" className="w-5 h-5" />
+                        <Icon name="ArrowUp" className="w-6 h-6" />
                     </button>
 
                 </div>
