@@ -1,5 +1,14 @@
-/* menu.js - 화이트리스트 보안 및 레퍼럴 유지 최종본 */
+/* menu.js - 화이트리스트 보안, 레퍼럴 유지 및 테마 선택 제어 */
 (function () {
+  // =========================================================
+  // [메뉴 테마 선택] 1, 2, 3, 4 중 원하는 번호를 지정하십시오.
+  // 1: Neumorphism (소프트 3D 입체 버튼)
+  // 2: Modern Capsule (라운드 캡슐 버튼)
+  // 3: Cyber Glossy (입체 광택 볼륨 버튼)
+  // 4: Minimal Outline (카드형 아웃라인 버튼)
+  // =========================================================
+  const CURRENT_THEME = 2;
+
   const defaultRef = "KRAQ767727-0";
 
   // 승인된 ID
@@ -47,9 +56,11 @@
   ];
 
   function buildMenu() {
+    const themeClass = `theme-${CURRENT_THEME}`;
+
     const topTargets = document.querySelectorAll('.cell-nav, #top-nav-container');
     topTargets.forEach(el => {
-      el.className = 'cell-nav';
+      el.className = `cell-nav ${themeClass}`;
       el.innerHTML = topMenu.map(m =>
         `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};" target="${m.target}" rel="noopener noreferrer">${m.name}</a>`
       ).join('');
@@ -57,14 +68,14 @@
 
     const bottomTargets = document.querySelectorAll('.cell-nav-bottom, #bottom-nav-container');
     bottomTargets.forEach(el => {
-      el.className = 'cell-nav-bottom';
+      el.className = `cell-nav-bottom ${themeClass}`;
       el.innerHTML = bottomMenu.map(m =>
         `<a href="${m.link}" class="cell-item" style="background-color: ${m.bg};" target="${m.target}" rel="noopener noreferrer">${m.name}</a>`
       ).join('');
     });
   }
 
-  // DOM 완료 시 1회만 깔끔하게 실행
+  // DOM 완료 시 1회만 실행
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', buildMenu);
   } else {

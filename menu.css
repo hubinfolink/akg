@@ -1,90 +1,121 @@
-/* menu.css - 상/하단 고정 메뉴 테마 세트 */
-
-/* =========================================================
-   [테마 선택 스위치]
-   원하는 테마의 주석을 해제하거나, body/nav 클래스에 부여하십시오.
-   기본 설정: Theme 1 (소프트 3D 버튼)
-   ========================================================= */
+/* menu.css - 상/하단 고정 메뉴 컬러 테마 세트 */
 
 /* 공통 고정 바 컨테이너 보정 */
 .cell-nav, .cell-nav-bottom {
   padding: 8px 10px !important;
   gap: 8px;
-  background-color: rgba(18, 18, 18, 0.95);
   backdrop-filter: blur(8px);
 }
 
-.cell-nav {
-  border-bottom: 1px solid #333;
-}
-
-.cell-nav-bottom {
-  border-top: 1px solid #333;
-}
-
 /* =========================================================
-   THEME 1: Neumorphism (소프트 3D 입체 버튼)
+   THEME 1: Neon Dark Cyber (네온 사이버 & 시안/핑크)
    ========================================================= */
+.theme-1 {
+  background-color: rgba(10, 15, 30, 0.95) !important;
+  border-color: #00f0ff !important;
+}
+
 .theme-1 .cell-item {
   border: none !important;
   border-radius: 8px !important;
-  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6), 2px 3px 5px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.5), 2px 3px 6px rgba(0, 0, 0, 0.6) !important;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   padding: 12px 0 !important;
   font-weight: 800 !important;
 }
 
+/* Theme 1 - 각 버튼 개별 커스텀 컬러 강조 */
+.theme-1 .cell-item:nth-child(1) { background-color: #00f0ff !important; color: #000 !important; }
+.theme-1 .cell-item:nth-child(2) { background-color: #ff0055 !important; color: #fff !important; }
+.theme-1 .cell-item:nth-child(3) { background-color: #7000ff !important; color: #fff !important; }
+.theme-1 .cell-item:nth-child(4) { background-color: #00ff66 !important; color: #000 !important; }
+
 .theme-1 .cell-item:active {
   transform: translateY(2px);
-  box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.4) !important;
+  box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.5) !important;
 }
 
+
 /* =========================================================
-   THEME 2: Modern Capsule (라운드 캡슐 버튼)
+   THEME 2: Warm Gold & Bronze (럭셔리 골드 & 브라운)
    ========================================================= */
+.theme-2 {
+  background-color: rgba(20, 16, 10, 0.95) !important;
+  border-color: #d4af37 !important;
+}
+
 .theme-2 .cell-item {
   border: none !important;
   border-radius: 20px !important;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
   transition: all 0.2s ease;
   padding: 10px 0 !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 }
+
+/* Theme 2 - 럭셔리 골드/샴페인 계열 컬러 재정의 */
+.theme-2 .cell-item:nth-child(1) { background-color: #f3e5ab !important; color: #3a2e00 !important; }
+.theme-2 .cell-item:nth-child(2) { background-color: #d4af37 !important; color: #1a1300 !important; }
+.theme-2 .cell-item:nth-child(3) { background-color: #aa7c11 !important; color: #ffffff !important; }
+.theme-2 .cell-item:nth-child(4) { background-color: #e5c158 !important; color: #2b1f00 !important; }
 
 .theme-2 .cell-item:active {
   transform: scale(0.95);
   opacity: 0.9;
 }
 
+
 /* =========================================================
-   THEME 3: Cyber Glossy (입체 광택 볼륨 버튼)
+   THEME 3: Vibrant Mint & Lime (비비드 민트 & 라임 파스텔)
    ========================================================= */
+.theme-3 {
+  background-color: rgba(15, 28, 25, 0.95) !important;
+  border-color: #2ee6a8 !important;
+}
+
 .theme-3 .cell-item {
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   border-radius: 6px !important;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(0, 0, 0, 0.1) 100%) !important;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(0, 0, 0, 0.15) 100%) !important;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
   padding: 11px 0 !important;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
   font-weight: 800 !important;
 }
 
+/* Theme 3 - 상큼한 멘톨/파스텔 비비드 컬러 */
+.theme-3 .cell-item:nth-child(1) { background-color: #2ee6a8 !important; color: #05261b !important; }
+.theme-3 .cell-item:nth-child(2) { background-color: #a8ff78 !important; color: #143305 !important; }
+.theme-3 .cell-item:nth-child(3) { background-color: #78ffd6 !important; color: #022e23 !important; }
+.theme-3 .cell-item:nth-child(4) { background-color: #f3f9a7 !important; color: #2e3302 !important; }
+
 .theme-3 .cell-item:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
 }
 
+
 /* =========================================================
-   THEME 4: Minimal Outline (카드형 아웃라인 버튼)
+   THEME 4: Deep Slate & Lemon (슬레이트 다크 & 레몬 옐로우)
    ========================================================= */
+.theme-4 {
+  background-color: rgba(18, 24, 38, 0.95) !important;
+  border-color: #ffe600 !important;
+}
+
 .theme-4 .cell-item {
-  border: 2px solid rgba(0, 0, 0, 0.15) !important;
+  border: 2px solid rgba(0, 0, 0, 0.2) !important;
   border-radius: 10px !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4) !important;
   padding: 11px 0 !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
   transition: transform 0.15s ease;
 }
+
+/* Theme 4 - 감각적인 레몬 & 오렌지/퍼플 대비 */
+.theme-4 .cell-item:nth-child(1) { background-color: #ffe600 !important; color: #111 !important; }
+.theme-4 .cell-item:nth-child(2) { background-color: #ff9900 !important; color: #111 !important; }
+.theme-4 .cell-item:nth-child(3) { background-color: #ff4b4b !important; color: #fff !important; }
+.theme-4 .cell-item:nth-child(4) { background-color: #9d50bb !important; color: #fff !important; }
 
 .theme-4 .cell-item:active {
   transform: translateY(1px);
