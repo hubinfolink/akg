@@ -29,9 +29,56 @@
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(255, 204, 170, 0.3);
       transition: transform 0.2s;
+      cursor: pointer;
     }
     .btn-register-action:active {
       transform: scale(0.98);
+    }
+
+    /* 아이프레임 모달 스타일 */
+    .iframe-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .iframe-container {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      height: 85vh;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .iframe-container iframe {
+      width: 100%;
+      height: calc(100% - 40px);
+      border: none;
+    }
+    .iframe-header {
+      height: 40px;
+      background: #222;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+    }
+    .btn-close-modal {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -48,7 +95,6 @@
     <div class="text-title">🔥 지금 가입하시면 나만의 홍보 페이지가 공짜!</div>
   </div>
 
-
   <div class="text-box">
     <div class="text-title">🏃️ 당장 가입해서 자리를 선점하세요</div>
   </div>
@@ -58,20 +104,33 @@
   </div>
 
   <div class="benefit-box">
-    <a id="btn-real-register" href="#" target="_blank" class="btn-register-action">🎁 일단 무료 가입하러 가기</a>
+    <!-- target="_blank" 제거 및 click 이벤트용으로 변경 -->
+    <a id="btn-real-register" class="btn-register-action">🎁 일단 무료 가입하러 가기</a>
   </div>
 
   <div class="text-box">
     <div class="text-title">
       ⏳망설이지 말고 선점하세요.<br><br>
       🚩 무료 가입 완료 후 랜딩신청 하시면, <strong>지금 보고 계신 랜딩페이지와 똑같은 랜딩페이지를 회원님의 전용 추천인 ID를 적용하여 100% 무료로 발급</strong>해 드립니다.<br><br>
-	  🔄 랜딩페이지의 업데이트도 자동으로 됩니다.<br>
-	  🚀 회원님은 이 랜딩페이지만 홍보하면 됩니다.
+      🔄 랜딩페이지의 업데이트도 자동으로 됩니다.<br>
+      🚀 회원님은 이 랜딩페이지만 홍보하면 됩니다.
     </div>
   </div>
-<br><br><br>
+  <br><br><br>
+
   <!-- 하단 메뉴 -->
   <nav class="cell-nav-bottom"></nav>
+
+  <!-- 내부 모달 아이프레임 영역 -->
+  <div id="register-modal" class="iframe-modal">
+    <div class="iframe-container">
+      <div class="iframe-header">
+        <span>회원가입</span>
+        <button id="btn-close-modal" class="btn-close-modal">&times;</button>
+      </div>
+      <iframe id="register-iframe" src="" title="회원가입 페이지"></iframe>
+    </div>
+  </div>
 
   <script>
     (function() {
@@ -82,17 +141,41 @@
       const urlParams = new URLSearchParams(window.location.search);
       let userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref');
 
-      // 화이트리스트 검증 (menu.js와 동일 조건)
+      // 화이트리스트 검증
       let finalRef = defaultRef;
       if (userRef && allowedRefs.includes(userRef)) {
         finalRef = userRef;
       }
 
-      // 최종 검증된 ID로 가입 링크 연결
+      const registerUrl = `http://user.nextstarglobal.com/Account/Register?ref=${finalRef}`;
+
       const realRegisterBtn = document.getElementById('btn-real-register');
+      const registerModal = document.getElementById('register-modal');
+      const registerIframe = document.getElementById('register-iframe');
+      const closeModalBtn = document.getElementById('btn-close-modal');
+
       if (realRegisterBtn) {
-        realRegisterBtn.href = `http://user.nextstarglobal.com/Account/Register?ref=${finalRef}`;
+        realRegisterBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          registerIframe.src = registerUrl;
+          registerModal.style.display = 'flex';
+        });
       }
+
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+          registerModal.style.display = 'none';
+          registerIframe.src = ''; // 닫을 때 iframe 초기화
+        });
+      }
+
+      // 모달 바깥 영역 클릭 시 닫기
+      window.addEventListener('click', function(e) {
+        if (e.target === registerModal) {
+          registerModal.style.display = 'none';
+          registerIframe.src = '';
+        }
+      });
     })();
   </script>
 </body>
