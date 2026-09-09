@@ -41,19 +41,20 @@
 
   // 상단 메뉴 데이터
   const topMenu = [
-    { name: "무료가입", link: `guide_register.html${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
-    { name: "가입방법", link: `guide_join.html${internalRefQuery}`, bg: "#a3e4d7", target: "_self" },
-    { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#d7bde2", target: "_blank" },
-    { name: "구매방법", link: `guide_buy.html${internalRefQuery}`, bg: "#ffc4d7", target: "_self" }
-  ];
-
-  // 하단 메뉴 데이터
-  const bottomMenu = [
     { name: "HOME", link: `./${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
     { name: "오피스", link: "https://www.nextstarglobal.com/", bg: "#a3e4d7", target: "_blank" },
     { name: "AKG란?", link: `akgnews.html${internalRefQuery}`, bg: "#d7bde2", target: "_self" },
     { name: "랜딩신청", link: `landing_apply.html${internalRefQuery}`, bg: "#ffc4d7", target: "_self" }
   ];
+
+  // 하단 메뉴 데이터
+  const bottomMenu = [
+	{ name: "구매방법", link: `guide_buy.html${internalRefQuery}`, bg: "#ffc4d7", target: "_self" },
+    { name: "가입방법", link: `guide_join.html${internalRefQuery}`, bg: "#a3e4d7", target: "_self" },
+    { name: "쇼핑몰", link: "https://www.roadmir.com/", bg: "#d7bde2", target: "_blank" },
+    { name: "무료가입", link: `guide_register.html${internalRefQuery}`, bg: "#ffccaa", target: "_self" }
+  ];
+
 
   function buildMenu() {
     const themeClass = `theme-${CURRENT_THEME}`;
