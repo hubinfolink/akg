@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>YT Analytics Compact View</title>
+    <title>YT Analytics Fold Optimized</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -24,12 +24,7 @@
     <script type="text/babel">
         const { useState } = React;
 
-        /* =========================================================================
-           [보스 전용 글자 및 카드 크기 조절]
-           ========================================================================= */
         const BASE_FONT_SIZE = '20px';
-        /* ========================================================================= */
-
         const DEFAULT_API_KEY = 'AIzaSyBBOrShpnWuTF-W2dfJI1AorYJhORtW0z4';
         const REGIONS = [{ code: 'KR', name: 'KR' }, { code: 'US', name: 'US' }, { code: 'JP', name: 'JP' }, { code: 'GB', name: 'UK' }];
         const CATEGORIES = [
@@ -57,7 +52,6 @@
             const [trendCategory, setTrendCategory] = useState('0');
             const [videoType, setVideoType] = useState('medium');
 
-            // 기본값 '오늘' 설정
             const todayStr = new Date().toISOString().split('T')[0];
             const [startDate, setStartDate] = useState(todayStr);
             const [endDate, setEndDate] = useState(todayStr);
@@ -129,10 +123,7 @@
             return (
                 <div style={{ fontSize: BASE_FONT_SIZE }} className="w-full min-h-screen relative leading-relaxed">
 
-                    {/* 일반 헤더 (고정 없음 / 스크롤 시 화면 밖으로 올라감) */}
                     <header className="bg-slate-900 p-3 border-b border-slate-800">
-
-                        {/* 숨겨진 설정 패널 (API 키, 국가, 카테고리) */}
                         <div className={`settings-panel ${isSettingsOpen ? 'open' : ''}`}>
                             <div className="bg-slate-800/80 p-3 rounded-2xl border border-slate-700 space-y-2">
                                 <div className="text-[0.75em] font-bold text-slate-400">시스템 설정</div>
@@ -160,7 +151,6 @@
                             </div>
                         </div>
 
-                        {/* 키워드 태그 스크롤 */}
                         <div className="flex overflow-x-auto gap-2 no-scrollbar pb-2.5 mb-2.5 border-b border-slate-800">
                             <button
                                 onClick={() => fetchData('trends')}
@@ -179,7 +169,6 @@
                             ))}
                         </div>
 
-                        {/* 옵션 세팅 (숏폼/기간) */}
                         <div className="flex items-center justify-between gap-2 mb-2.5">
                             <div className="flex bg-slate-800 p-1 rounded-xl border border-slate-700 shrink-0">
                                 {['short', 'medium', 'any'].map(v => (
@@ -206,7 +195,6 @@
                             </div>
                         </div>
 
-                        {/* 검색창 & 설정 버튼 */}
                         <div className="flex gap-2">
                             <input
                                 type="text"
@@ -228,7 +216,6 @@
                         </div>
                     </header>
 
-                    {/* 풀-스크린 카드 피드 */}
                     <main className="w-full divide-y divide-slate-800/80">
                         {loading && (
                             <div className="py-20 text-center text-slate-400 font-bold">
@@ -245,7 +232,13 @@
                         {!loading && videos.map((v, index) => (
                             <div key={v.id} className="bg-slate-900 w-full active:bg-slate-800/50 transition-colors pb-4">
 
-                                <a href={`https://youtu.be/${v.id}`} target="_blank" className="relative block w-full aspect-video bg-slate-950 overflow-hidden">
+                                {/* 웹 URL로 변경 + rel 속성 적용으로 앱 강제 실행 우회 */}
+                                <a
+                                    href={`https://www.youtube.com/watch?v=${v.id}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="relative block w-full aspect-video bg-slate-950 overflow-hidden"
+                                >
                                     <img src={v.thumb} className="w-full h-full object-cover" alt="thumb" />
 
                                     <span className="absolute top-2 left-2 bg-black/80 text-amber-400 font-black px-2.5 py-1 rounded-lg text-[0.8em] border border-amber-400/30 shadow">
@@ -258,7 +251,12 @@
                                 </a>
 
                                 <div className="px-3 pt-3 space-y-1.5">
-                                    <a href={`https://youtu.be/${v.id}`} target="_blank" className="block font-black text-slate-100 line-clamp-2 leading-snug text-[0.95em]">
+                                    <a
+                                        href={`https://www.youtube.com/watch?v=${v.id}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="block font-black text-slate-100 line-clamp-2 leading-snug text-[0.95em]"
+                                    >
                                         {v.title}
                                     </a>
 
@@ -272,7 +270,6 @@
                         ))}
                     </main>
 
-                    {/* 플로팅 탑 버튼 */}
                     <button
                         onClick={scrollToTop}
                         className="fixed bottom-6 right-6 z-50 bg-red-600 text-white p-4 rounded-full shadow-2xl active:scale-90 border-2 border-white/20"
