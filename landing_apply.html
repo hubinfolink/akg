@@ -8,18 +8,79 @@
   <script src="menu.js" defer></script>
   <style>
     .apply-container {
-      max-width: ;
+      max-width: 600px;
       margin: 20px auto;
       padding: 0 10px;
     }
     .form-wrapper {
       width: 100%;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 25px 20px;
+      box-sizing: border-box;
+      color: #fff;
+      margin-top: 20px;
     }
-    .form-wrapper iframe {
+    .form-title {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffccaa;
+      border-bottom: 1px solid #333;
+      padding-bottom: 15px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: #ddd;
+    }
+    .form-group label .required {
+      color: #ff5555;
+      margin-left: 3px;
+    }
+    .form-group input {
       width: 100%;
-      height: 2000px;
-      border: 0;
-      border-radius: 8px;
+      padding: 12px;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #ffccaa;
+    }
+    .form-group input[readonly] {
+      background: #111;
+      color: #ffccaa;
+      font-weight: bold;
+      border-color: #333;
+      cursor: not-allowed;
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #ffccaa;
+      color: #111;
+      border: none;
+      border-radius: 6px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+    .btn-submit:hover {
+      background: #e6b899;
     }
   </style>
 </head>
@@ -31,60 +92,139 @@
   <div class="apply-container">
     <div class="text-box">
       <div class="text-title">🚀 나만의 전용 랜딩페이지 100% 무료 발급</div>
-		<div class="text-content">본인의 AKG ID만 입력하시면, 본인의 레퍼럴 코드가 적용된 지금 보고 계신 홍보용 랜딩페이지를 무료로 제작·발급해 드립니다.</div>
-	</div>
+      <div class="text-content">본인의 AKG ID만 입력하시면, 본인의 레퍼럴 코드가 적용된 지금 보고 계신 홍보용 랜딩페이지를 무료로 제작·발급해 드립니다.</div>
+    </div>
 
     <div class="text-box">
       <div class="text-title">⚔️ 링크 하나로 영업 끝! 강력한 마케팅 무기를 가져가세요</div>
-		<div class="text-content">장점 1: 복잡한 세팅 없이 본인 추천인 링크 완벽 매핑<br>장점 2: SNS 및 온라인 홍보 시 전환율 극대화</div>
-
-	</div>
+      <div class="text-content">장점 1: 복잡한 세팅 없이 본인 추천인 링크 완벽 매핑<br>장점 2: SNS 및 온라인 홍보 시 전환율 극대화</div>
+    </div>
 
     <div class="text-box">
       <div class="text-title">🎁 무료가입 후 정회원에게 본인 ID가 매핑된 웹페이지를 공짜로 드립니다.</div>
     </div>
-  </div>
 
-<!-- 상단 레퍼럴 ID 표시 및 복사 바 -->
+    <!-- 상단 레퍼럴 ID 표시 및 복사 바 -->
+    <div class="text-box">
+      🔗 상위 추천인 ID :
+      <div id="referral-display-bar" style="background: #111; color: #ffccaa; text-align: center; padding: 10px; font-size: 26px; border-bottom: 1px solid #ffccaa; word-break: break-all; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span><strong id="current-ref-id" style="color: #fff;"></strong></span>
+        <button id="btn-copy-ref" style="background: #ffccaa; color: #111; border: none; padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer;">복사</button>
+      </div>
+    </div>
 
-<div class="text-box">
-🔗 상위 추천인 ID :
-<div id="referral-display-bar" style="background: #111; color: #ffccaa; text-align: center; padding: 10px; font-size: 26px; border-bottom: 1px solid #ffccaa; word-break: break-all; display: flex; align-items: center; justify-content: center; gap: 8px;">
-  <span><strong id="current-ref-id" style="color: #fff;"></strong></span>
-  <button id="btn-copy-ref" style="background: #ffccaa; color: #111; border: none; padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer;">복사</button>
-</div>
-</div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const refSpan = document.getElementById('current-ref-id');
-    const copyBtn = document.getElementById('btn-copy-ref');
-    const targetRef = window.FINAL_REF || 'KRAQ767727-0';
+    <!-- 자체 HTML 신청 폼 영역 (아이프레임 대체) -->
+    <div class="form-wrapper">
+      <div class="form-title">📝 랜딩페이지 무료 신청서</div>
 
-    if (refSpan) {
-      refSpan.textContent = targetRef;
-    }
+      <form id="applyForm">
+        <!-- 1. 상위 파트너 ID (수정 불가 고정) -->
+        <div class="form-group">
+          <label for="parentRef">상위 파트너 AKG ID <span class="required">*</span></label>
+          <input type="text" id="parentRef" name="parentRef" readonly placeholder="자동 매핑 중...">
+        </div>
 
-    if (copyBtn) {
-      copyBtn.addEventListener('click', function() {
-        navigator.clipboard.writeText(targetRef).then(function() {
-          copyBtn.textContent = '복사완료!';
-          setTimeout(() => { copyBtn.textContent = '복사'; }, 1500);
-        }).catch(function() {
-          alert('복사에 실패했습니다.');
-        });
-      });
-    }
-  });
-</script>
+        <!-- 2. 본인의 AKG ID -->
+        <div class="form-group">
+          <label for="myRef">본인의 AKG ID <span class="required">*</span></label>
+          <input type="text" id="myRef" name="myRef" required placeholder="예: KRAQ123456-0">
+        </div>
 
+        <!-- 3. 이메일 주소 -->
+        <div class="form-group">
+          <label for="email">이메일 주소 <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="example@email.com">
+        </div>
 
-  <!-- 구글 폼 매립 영역 -->
-  <div class="form-wrapper">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9tRHNZG8QesjTxbgNVH8OPJOVDWbYNyWRGgG0JsglQfDwAg/viewform?embedded=true">로드 중…</iframe>
+        <!-- 4. 휴대폰 번호 (선택) -->
+        <div class="form-group">
+          <label for="phone">휴대폰 번호 (선택)</label>
+          <input type="tel" id="phone" name="phone" placeholder="010-0000-0000">
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">무료 발급 신청하기</button>
+      </form>
+    </div>
+
   </div>
 
   <!-- 하단 메뉴 -->
   <nav class="cell-nav-bottom"></nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. 추천인 ID 표시 및 입력창 자동 매핑
+      const refSpan = document.getElementById('current-ref-id');
+      const copyBtn = document.getElementById('btn-copy-ref');
+      const parentRefInput = document.getElementById('parentRef');
+      const targetRef = window.FINAL_REF || 'KRAQ767727-0';
+
+      if (refSpan) refSpan.textContent = targetRef;
+      if (parentRefInput) parentRefInput.value = targetRef; // 폼의 읽기전용 입력창에도 주입
+
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function() {
+          navigator.clipboard.writeText(targetRef).then(function() {
+            copyBtn.textContent = '복사완료!';
+            setTimeout(() => { copyBtn.textContent = '복사'; }, 1500);
+          }).catch(function() {
+            alert('복사에 실패했습니다.');
+          });
+        });
+      }
+
+      // 2. 폼 제출 처리 (구글 시트로 전송)
+      const applyForm = document.getElementById('applyForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      applyForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 1단계에서 생성한 구글 웹 앱 URL 주소 입력
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbz7AyM8Qy5COE3VLhzmAaUSGSBw1Mq4XupVVUdvatwLvHS6YIV4olnIg_G9M8OJziZq/exec";
+
+        if (GAS_URL.includes("여기에_구글")) {
+          alert("구글 웹 앱 URL을 먼저 코드에 설정해주세요.");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "전송 중입니다...";
+
+        const payload = {
+          parentRef: document.getElementById('parentRef').value,
+          myRef: document.getElementById('myRef').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value,
+          userAgent: navigator.userAgent,
+          resolution: `${window.screen.width}x${window.screen.height}`,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          referrer: document.referrer || "직접 접속 (Direct)"
+        };
+
+        fetch(GAS_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8',
+          },
+          body: JSON.stringify(payload)
+        })
+        .then(() => {
+          alert("신청이 성공적으로 완료되었습니다!");
+          applyForm.reset();
+          parentRefInput.value = targetRef; // 리셋 후에도 상위 ID 고정 유지
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("전송에 실패했습니다. 다시 시도해 주세요.");
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "무료 발급 신청하기";
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
