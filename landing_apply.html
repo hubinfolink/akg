@@ -13,32 +13,35 @@
       padding: 0 10px;
     }
 
-    /* 기존 .text-title / .text-content 폰트 스펙과 동일하게 통일 */
+    /* 제목과 입력칸을 한 줄(가로) 배치 */
     .form-group {
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       text-align: left;
     }
     .form-group label {
-      display: block;
-      /* 상단 제목 타이틀급 크기로 설정해 시원하게 보이도록 지정 */
-      font-size: 22px; 
+      /* 라벨 너비 고정으로 가로 정렬 라인 맞춤 */
+      flex: 0 0 170px;
+      font-size: 20px;
       font-weight: bold;
-      margin-bottom: 8px;
       color: #ffccaa;
+      white-space: nowrap;
     }
     .form-group label .required {
       color: #ff5555;
-      margin-left: 4px;
+      margin-left: 2px;
     }
     .form-group input {
+      flex: 1;
       width: 100%;
-      padding: 14px;
+      padding: 12px;
       background: #111;
       border: 2px solid #ffccaa;
       border-radius: 8px;
       color: #fff;
-      /* 모바일 노안 대책: 입력 글자도 22px로 매우 크게 설정 */
-      font-size: 22px; 
+      font-size: 20px;
       box-sizing: border-box;
       font-weight: bold;
     }
@@ -64,10 +67,22 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
-      margin-top: 10px;
+      margin-top: 15px;
     }
     .btn-submit:hover {
       background: #e6b899;
+    }
+
+    /* 초소형 모바일 화면 대응 (폭이 420px 이하일 때 자간 조정) */
+    @media (max-width: 420px) {
+      .form-group label {
+        flex: 0 0 140px;
+        font-size: 17px;
+      }
+      .form-group input {
+        font-size: 17px;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -91,23 +106,14 @@
       <div class="text-title">🎁 무료가입 후 정회원에게 본인 ID가 매핑된 웹페이지를 공짜로 드립니다.</div>
     </div>
 
-    <!-- 상단 레퍼럴 ID 표시 및 복사 바 -->
-    <div class="text-box">
-      🔗 상위 추천인 ID :
-      <div id="referral-display-bar" style="background: #111; color: #ffccaa; text-align: center; padding: 10px; font-size: 26px; border-bottom: 1px solid #ffccaa; word-break: break-all; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px;">
-        <span><strong id="current-ref-id" style="color: #fff;"></strong></span>
-        <button id="btn-copy-ref" style="background: #ffccaa; color: #111; border: none; padding: 6px 12px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer;">복사</button>
-      </div>
-    </div>
-
-    <!-- 기존 .text-box 내부에 신청서 통합 (레이아웃 및 CSS 완벽 공유) -->
+    <!-- 신청서 영역 (상단 복사 바 제거 및 한 줄 정렬 반영) -->
     <div class="text-box">
       <div class="text-title" style="margin-bottom: 25px;">📝 랜딩페이지 무료 신청서</div>
-      
+
       <form id="applyForm">
         <!-- 1. 상위 파트너 ID (수정 불가 고정) -->
         <div class="form-group">
-          <label for="parentRef">상위 파트너 AKG ID <span class="required">*</span></label>
+          <label for="parentRef">상위 파트너 ID <span class="required">*</span></label>
           <input type="text" id="parentRef" name="parentRef" readonly placeholder="자동 매핑 중...">
         </div>
 
@@ -140,25 +146,11 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 1. 추천인 ID 표시 및 입력창 자동 매핑
-      const refSpan = document.getElementById('current-ref-id');
-      const copyBtn = document.getElementById('btn-copy-ref');
+      // 1. 추천인 ID 자동 매핑
       const parentRefInput = document.getElementById('parentRef');
       const targetRef = window.FINAL_REF || 'KRAQ767727-0';
 
-      if (refSpan) refSpan.textContent = targetRef;
       if (parentRefInput) parentRefInput.value = targetRef;
-
-      if (copyBtn) {
-        copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText(targetRef).then(function() {
-            copyBtn.textContent = '복사완료!';
-            setTimeout(() => { copyBtn.textContent = '복사'; }, 1500);
-          }).catch(function() {
-            alert('복사에 실패했습니다.');
-          });
-        });
-      }
 
       // 2. 폼 제출 처리 (구글 시트로 전송)
       const applyForm = document.getElementById('applyForm');
@@ -199,7 +191,7 @@
         .then(() => {
           alert("신청이 성공적으로 완료되었습니다!");
           applyForm.reset();
-          parentRefInput.value = targetRef; // 리셋 후에도 상위 ID 고정 유지
+          parentRefInput.value = targetRef; // 리셋 후에도 고정값 유지
         })
         .catch(error => {
           console.error("Error:", error);
