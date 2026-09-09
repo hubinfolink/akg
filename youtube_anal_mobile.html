@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>YT Analytics Mobile (Boss Custom)</title>
+    <title>YT Analytics Card View</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -18,16 +18,16 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans selection:bg-red-500 pb-12">
+<body class="bg-slate-900 text-slate-100 font-sans selection:bg-red-500 pb-16">
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState } = React;
 
         /* =========================================================================
-           [보스 전용 글자 크기 조절]
-           이 숫자만 18px, 20px, 22px, 24px 등으로 바꿔서 비교해봐.
-           모든 버튼, 입력창, 제목, 조회수 글씨가 이 비율에 맞춰 자동으로 커짐!
+           [보스 전용 글자 및 카드 크기 조절]
+           이 숫자만 18px, 20px, 22px, 24px 등으로 바꾸면
+           카드 크기, 썸네일 높이, 글씨가 비율대로 통째로 커짐!
            ========================================================================= */
         const BASE_FONT_SIZE = '20px';
         /* ========================================================================= */
@@ -104,7 +104,7 @@
                         id: item.id.videoId || item.id,
                         title: item.snippet.title,
                         channelTitle: item.snippet.channelTitle,
-                        thumb: item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url,
+                        thumb: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url,
                         vDate: item.snippet.publishedAt.split('T')[0],
                         views: parseInt(item.statistics?.viewCount || 0)
                     })).sort((a, b) => b.views - a.views);
@@ -228,10 +228,10 @@
                         </div>
                     </header>
 
-                    {/* 피드 리스트 */}
-                    <main className="mt-4 space-y-3">
+                    {/* 카드(Card) 형태 피드 리스트 */}
+                    <main className="mt-4 space-y-4">
                         {loading && (
-                            <div className="py-16 text-center text-slate-400 font-bold">
+                            <div className="py-20 text-center text-slate-400 font-bold">
                                 로딩 중...
                             </div>
                         )}
@@ -243,31 +243,37 @@
                         )}
 
                         {!loading && videos.map((v, index) => (
-                            <div key={v.id} className="bg-slate-800/90 border border-slate-700 rounded-2xl p-3 flex gap-3 items-center active:bg-slate-800 transition-colors shadow-md">
-                                {/* 썸네일 */}
-                                <a href={`https://youtu.be/${v.id}`} target="_blank" className="relative w-36 h-20 shrink-0 rounded-xl overflow-hidden bg-slate-900 border border-slate-700/60">
+                            <div key={v.id} className="bg-slate-800/90 border border-slate-700 rounded-2xl overflow-hidden shadow-xl active:bg-slate-800 transition-colors">
+
+                                {/* 1. 카드 상단: 대형 썸네일 영역 */}
+                                <a href={`https://youtu.be/${v.id}`} target="_blank" className="relative block w-full aspect-video bg-slate-900 overflow-hidden">
                                     <img src={v.thumb} className="w-full h-full object-cover" alt="thumb" />
-                                    <span className="absolute top-1 left-1 bg-black/80 text-amber-400 font-black px-1.5 py-0.5 rounded-md text-[0.7em]">
+
+                                    {/* 순위 표식 */}
+                                    <span className="absolute top-2 left-2 bg-black/80 text-amber-400 font-black px-2.5 py-1 rounded-lg text-[0.8em] border border-amber-400/30 shadow">
                                         #{index + 1}
+                                    </span>
+
+                                    {/* 조회수 배지 (썸네일 우측 하단 강조) */}
+                                    <span className="absolute bottom-2 right-2 bg-red-600/90 text-white font-black px-3 py-1 rounded-xl text-[0.85em] shadow-lg border border-red-400/30">
+                                        {v.views.toLocaleString()}회
                                     </span>
                                 </a>
 
-                                {/* 동영상 정보 */}
-                                <div className="flex-1 min-w-0 flex flex-col justify-between h-20 py-0.5">
-                                    <a href={`https://youtu.be/${v.id}`} target="_blank" className="font-bold text-slate-100 line-clamp-2 leading-snug text-[0.9em]">
+                                {/* 2. 카드 하단: 상세 정보 영역 */}
+                                <div className="p-3.5 space-y-2">
+                                    {/* 영상 제목 */}
+                                    <a href={`https://youtu.be/${v.id}`} target="_blank" className="block font-black text-slate-100 line-clamp-2 leading-snug text-[0.95em]">
                                         {v.title}
                                     </a>
 
-                                    <div className="flex items-center justify-between text-[0.75em] text-slate-400">
-                                        <span className="truncate max-w-[110px] text-slate-400 font-medium">{v.channelTitle}</span>
-                                        <div className="flex items-center gap-1.5 shrink-0">
-                                            <span className="font-black text-red-400 bg-red-950/60 px-2 py-0.5 rounded-lg border border-red-800/40">
-                                                {v.views.toLocaleString()}회
-                                            </span>
-                                            <span className="text-slate-500">{v.vDate.slice(2)}</span>
-                                        </div>
+                                    {/* 채널명 & 게시물 작성 날짜 */}
+                                    <div className="flex items-center justify-between text-[0.8em] text-slate-400 font-bold pt-1 border-t border-slate-700/50">
+                                        <span className="truncate max-w-[200px] text-slate-300">{v.channelTitle}</span>
+                                        <span className="text-slate-500 font-mono">{v.vDate}</span>
                                     </div>
                                 </div>
+
                             </div>
                         ))}
                     </main>
