@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>구매방법 안내</title>
   <link rel="stylesheet" href="style.css">
-  <script src="menu.js"></script>
+  <script src="menu.js" defer></script>
   <style>
     .video-container {
       position: relative;
@@ -34,14 +34,13 @@
     <div class="text-title">AKG 제품 구매방법 안내</div>
   </div>
 
-  <!-- 유튜브 iframe 동영상 영역 -->
+  <!-- 유튜브 iframe 동영상 영역 (소리 재생을 위해 autoplay 및 mute 파라미터 제거) -->
   <div class="video-container">
-    <iframe src="https://www.youtube.com/embed/VRTiRY82z6A?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/VRTiRY82z6A" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 
   <!-- 하단 메뉴 -->
   <nav class="cell-nav-bottom"></nav>
 
-  <script src="menu.js"></script>
 </body>
 </html>
