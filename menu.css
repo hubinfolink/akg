@@ -1,0 +1,91 @@
+/* menu.css - 상/하단 고정 메뉴 테마 세트 */
+
+/* =========================================================
+   [테마 선택 스위치]
+   원하는 테마의 주석을 해제하거나, body/nav 클래스에 부여하십시오.
+   기본 설정: Theme 1 (소프트 3D 버튼)
+   ========================================================= */
+
+/* 공통 고정 바 컨테이너 보정 */
+.cell-nav, .cell-nav-bottom {
+  padding: 8px 10px !important;
+  gap: 8px;
+  background-color: rgba(18, 18, 18, 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.cell-nav {
+  border-bottom: 1px solid #333;
+}
+
+.cell-nav-bottom {
+  border-top: 1px solid #333;
+}
+
+/* =========================================================
+   THEME 1: Neumorphism (소프트 3D 입체 버튼)
+   ========================================================= */
+.theme-1 .cell-item {
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6), 2px 3px 5px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  padding: 12px 0 !important;
+  font-weight: 800 !important;
+}
+
+.theme-1 .cell-item:active {
+  transform: translateY(2px);
+  box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* =========================================================
+   THEME 2: Modern Capsule (라운드 캡슐 버튼)
+   ========================================================= */
+.theme-2 .cell-item {
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.2s ease;
+  padding: 10px 0 !important;
+  font-weight: 700 !important;
+}
+
+.theme-2 .cell-item:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+}
+
+/* =========================================================
+   THEME 3: Cyber Glossy (입체 광택 볼륨 버튼)
+   ========================================================= */
+.theme-3 .cell-item {
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 6px !important;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(0, 0, 0, 0.1) 100%) !important;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  padding: 11px 0 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  font-weight: 800 !important;
+}
+
+.theme-3 .cell-item:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* =========================================================
+   THEME 4: Minimal Outline (카드형 아웃라인 버튼)
+   ========================================================= */
+.theme-4 .cell-item {
+  border: 2px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  padding: 11px 0 !important;
+  font-weight: 700 !important;
+  transition: transform 0.15s ease;
+}
+
+.theme-4 .cell-item:active {
+  transform: translateY(1px);
+}
