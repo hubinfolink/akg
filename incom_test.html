@@ -33,23 +33,28 @@
     document.getElementById('workDate').value = new Date().toISOString().substring(0, 10);
 
     function sendData() {
-      // 1단계에서 얻은 구글 웹앱 URL을 아래에 입력
+      // 1단계에서 얻은 구글 웹앱 URL을 입력
       const GAS_URL = "https://script.google.com/macros/s/AKfycbxXdtqrRyocgvwnhu1cWxKVbT9f3jD3lAUxr9xzO9AxAzvPE1h_osQWwXuzPlNQ2qWA/exec";
 
       const date = document.getElementById('workDate').value;
       const amount = document.getElementById('income').value;
 
       if (!amount) {
-        alert("금액을 입력해, 보스!");
+        alert("금액을 입력해!");
         return;
       }
 
+      // 수집 항목 생성
       const payload = {
         date: date,
-        amount: amount
+        amount: amount,
+        userAgent: navigator.userAgent,                                      // 기기 및 브라우저 정보
+        resolution: `${window.screen.width}x${window.screen.height}`,         // 화면 해상도 (예: 390x844)
+        language: navigator.language || navigator.userLanguage,              // 언어 (예: ko-KR)
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,          // 타임존 (예: Asia/Seoul)
+        referrer: document.referrer || "직접 접속 (Direct)"                   // 유입 경로
       };
 
-      // 구글 시트로 데이터 전송 (cors 이슈 회피를 위해 mode: 'no-cors' 사용 가능)
       fetch(GAS_URL, {
         method: 'POST',
         headers: {
@@ -58,12 +63,12 @@
         body: JSON.stringify(payload)
       })
       .then(() => {
-        alert("시트에 전송 완료!");
-        document.getElementById('income').value = ''; // 입력창 초기화
+        alert("정보와 함께 전송 완료!");
+        document.getElementById('income').value = '';
       })
       .catch(error => {
         console.error("에러 발생:", error);
-        alert("전송 실패했다.");
+        alert("전송 실패");
       });
     }
   </script>
