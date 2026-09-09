@@ -2,11 +2,10 @@
 (function () {
   const defaultRef = "KRAQ767727-0";
 
-  // 2. 승인된 ID
+  // 승인된 ID
   const allowedRefs = [
     "KRAQ917863-0",
   ];
-  // ==========================================
 
   // 1. URL에서 ?ref= 파라미터 값 읽어오기
   const urlParams = new URLSearchParams(window.location.search);
@@ -19,16 +18,19 @@
     userRef = sessionStorage.getItem('saved_ref');
   }
 
-  // 3. 화이트리스트 검증 (목록에 있는 ID만 인정, 없으면 기본 ID로 강제 변경)
+  // 3. 화이트리스트 검증
   let finalRef = defaultRef;
   if (userRef && allowedRefs.includes(userRef)) {
     finalRef = userRef;
   }
 
-  // 4. 내부 링크용 쿼리 스트링 (검증된 유효 회원인 경우에만 내부 이동 시 파라미터 유지)
+  // 타 스크립트에서 참조할 수 있도록 전역 변수 등록
+  window.FINAL_REF = finalRef;
+
+  // 4. 내부 링크용 쿼리 스트링
   const internalRefQuery = (userRef && allowedRefs.includes(userRef)) ? `?ref=${userRef}` : '';
 
-// 상단 메뉴 데이터
+  // 상단 메뉴 데이터
   const topMenu = [
     { name: "무료가입", link: `guide_register.html${internalRefQuery}`, bg: "#ffccaa", target: "_self" },
     { name: "가입방법", link: `guide_join.html${internalRefQuery}`, bg: "#a3e4d7", target: "_self" },
@@ -45,7 +47,6 @@
   ];
 
   function buildMenu() {
-    // 1. 상단 메뉴 렌더링
     const topTargets = document.querySelectorAll('.cell-nav, #top-nav-container');
     topTargets.forEach(el => {
       el.className = 'cell-nav';
@@ -54,7 +55,6 @@
       ).join('');
     });
 
-    // 2. 하단 메뉴 렌더링
     const bottomTargets = document.querySelectorAll('.cell-nav-bottom, #bottom-nav-container');
     bottomTargets.forEach(el => {
       el.className = 'cell-nav-bottom';
@@ -64,11 +64,10 @@
     });
   }
 
-  // 문서 로딩 대응 double 실행
-  buildMenu();
+  // DOM 완료 시 1회만 깔끔하게 실행
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', buildMenu);
+  } else {
+    buildMenu();
   }
-  window.addEventListener('load', buildMenu);
 })();
-

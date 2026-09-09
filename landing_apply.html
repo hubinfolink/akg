@@ -5,46 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>무료 랜딩페이지 신청</title>
   <link rel="stylesheet" href="style.css">
-  <script src="menu.js"></script>
+  <script src="menu.js" defer></script>
   <style>
     .apply-container {
-      max-width: 640px;
+      max-width: ;
       margin: 20px auto;
       padding: 0 10px;
-    }
-    .info-card {
-      background: #1e1e1e;
-      border: 2px solid #ffccaa;
-      border-radius: 12px;
-      padding: 20px;
-      color: #fff;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
-    .info-card h3 {
-      color: #ffccaa;
-      margin-top: 0;
-      font-size: 18px;
-      text-align: center;
-      word-break: keep-all;
-    }
-    .info-card ul {
-      padding-left: 20px;
-      margin: 15px 0;
-      line-height: 1.7;
-      color: #ddd;
-      font-size: 14px;
-    }
-    .info-card .highlight {
-      color: #22c55e;
-      font-weight: bold;
     }
     .form-wrapper {
       width: 100%;
     }
     .form-wrapper iframe {
       width: 100%;
-      height: 2000px; /* 폼 항목 전체가 스크롤 없이 시원하게 보이도록 높이 확보 */
+      height: 2000px;
       border: 0;
       border-radius: 8px;
     }
@@ -54,34 +27,64 @@
 
   <!-- 상단 메뉴 -->
   <nav class="cell-nav"></nav>
-  
-  <div class="apply-container">
 
+  <div class="apply-container">
     <div class="text-box">
-      <div class="text-title">🚀 나만의 전용 랜딩페이지 무료 발급</div>
-    </div>
+      <div class="text-title">🚀 나만의 전용 랜딩페이지 100% 무료 발급</div>
+		<div class="text-content">본인의 AKG ID만 입력하시면, 본인의 레퍼럴 코드가 적용된 지금 보고 계신 홍보용 랜딩페이지를 무료로 제작·발급해 드립니다.</div>
+	</div>
 
     <div class="text-box">
       <div class="text-title">⚔️ 링크 하나로 영업 끝! 강력한 마케팅 무기를 가져가세요</div>
-    </div>
+		<div class="text-content">장점 1: 복잡한 세팅 없이 본인 추천인 링크 완벽 매핑<br>장점 2: SNS 및 온라인 홍보 시 전환율 극대화</div>
+
+	</div>
 
     <div class="text-box">
-      <div class="text-title">🎁 무료가입만 하면 본인 ID가 매핑된 웹페이지를 공짜로 드립니다.</div>
+      <div class="text-title">🎁 무료가입 후 정회원에게 본인 ID가 매핑된 웹페이지를 공짜로 드립니다.</div>
     </div>
-    
   </div>
 
+<!-- 상단 레퍼럴 ID 표시 및 복사 바 -->
+
+<div class="text-box">
+🔗 상위 추천인 ID :
+<div id="referral-display-bar" style="background: #111; color: #ffccaa; text-align: center; padding: 10px; font-size: 26px; border-bottom: 1px solid #ffccaa; word-break: break-all; display: flex; align-items: center; justify-content: center; gap: 8px;">
+  <span><strong id="current-ref-id" style="color: #fff;"></strong></span>
+  <button id="btn-copy-ref" style="background: #ffccaa; color: #111; border: none; padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 4px; cursor: pointer;">복사</button>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const refSpan = document.getElementById('current-ref-id');
+    const copyBtn = document.getElementById('btn-copy-ref');
+    const targetRef = window.FINAL_REF || 'KRAQ767727-0';
+
+    if (refSpan) {
+      refSpan.textContent = targetRef;
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function() {
+        navigator.clipboard.writeText(targetRef).then(function() {
+          copyBtn.textContent = '복사완료!';
+          setTimeout(() => { copyBtn.textContent = '복사'; }, 1500);
+        }).catch(function() {
+          alert('복사에 실패했습니다.');
+        });
+      });
+    }
+  });
+</script>
 
 
-    <!-- 구글 폼 매립 영역 (보스 실 주소 적용) -->
-    <div class="form-wrapper">
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9tRHNZG8QesjTxbgNVH8OPJOVDWbYNyWRGgG0JsglQfDwAg/viewform?embedded=true">로드 중…</iframe>
-    </div>
+  <!-- 구글 폼 매립 영역 -->
+  <div class="form-wrapper">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSd9tRHNZG8QesjTxbgNVH8OPJOVDWbYNyWRGgG0JsglQfDwAg/viewform?embedded=true">로드 중…</iframe>
   </div>
 
   <!-- 하단 메뉴 -->
   <nav class="cell-nav-bottom"></nav>
 
-  <script src="menu.js"></script>
 </body>
 </html>

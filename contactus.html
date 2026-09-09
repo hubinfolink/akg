@@ -5,66 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AKG 문의하기</title>
   <link rel="stylesheet" href="style.css">
-  <!-- 메뉴 공통 스크립트 연결 -->
-  <script src="menu.js"></script>
+  <script src="menu.js" defer></script>
 </head>
 <body>
 
-  <!-- 상단 메뉴 자리 -->
+  <!-- 상단 메뉴 -->
   <nav class="cell-nav"></nav>
 
   <div class="text-box">
     <div>
-       <a id="btn-telegram" href="#" target="_blank" class="btn btn-telegram">텔레그램으로 문의하기</a>
+       <a id="btn-telegram" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-telegram">텔레그램으로 문의하기</a>
     </div>
-    <div class="text-content"></div>
   </div>
 
   <div class="text-box">
     <div>
-       <a id="btn-kakao" href="https://open.kakao.com/o/sBOSS_KAKAO" target="_blank" class="btn btn-kakao">카카오톡으로 문의하기</a>
+       <a id="btn-kakao" href="https://open.kakao.com/o/sBOSS_KAKAO" target="_blank" rel="noopener noreferrer" class="btn btn-kakao">카카오톡으로 문의하기</a>
     </div>
-    <div class="text-content"></div>
   </div>
 
   <div class="text-box">
     <div>
        <a id="btn-sms" href="#" class="btn btn-sms">문자 메세지로 문의하기</a>
     </div>
-    <div class="text-content"></div>
   </div>
 
-<script>
-  (function() {
-    // 1. URL 및 세션에서 레퍼럴 ID 읽어오기 (없으면 보스 기본 ID)
-    const urlParams = new URLSearchParams(window.location.search);
-    const userRef = urlParams.get('ref') || sessionStorage.getItem('saved_ref') || "KRAQ767727-0";
-
-    // 2. 텔레그램 링크 조립 (보스 개인 계정으로 자동 입력 문구 포함 연결)
-    const tgBtn = document.getElementById('btn-telegram');
-    const bossTelegramId = "cuntting"; // 보스 개인 텔레그램 아이디
-    const tgMsg = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
-
-    if (tgBtn) {
-      tgBtn.href = `https://t.me/${bossTelegramId}?text=${tgMsg}`;
-    }
-
-    // 3. 문자(SMS) 자동 완성 링크 조립 (보스 수신 전용 번호 세팅)
-    const smsBtn = document.getElementById('btn-sms');
-    const bossPhone = "01012345678"; // 보스 실제 핸드폰 번호로 변경 필요
-    const smsText = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
-
-    if (smsBtn) {
-      smsBtn.href = `sms:${bossPhone}?body=${smsText}`;
-    }
-  })();
-</script>
-
-  <!-- 하단 메뉴 자리 -->
+  <!-- 하단 메뉴 -->
   <nav class="cell-nav-bottom"></nav>
 
-  <!-- 메뉴 자동 삽입 스크립트 (맨 아래 배치) -->
-  <script src="menu.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const userRef = window.FINAL_REF || "KRAQ767727-0";
 
+      // 텔레그램 링크 세팅
+      const tgBtn = document.getElementById('btn-telegram');
+      const bossTelegramId = "cuntting";
+      const tgMsg = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
+      if (tgBtn) {
+        tgBtn.href = `https://t.me/${bossTelegramId}?text=${tgMsg}`;
+      }
+
+      // 문자(SMS) 링크 세팅
+      const smsBtn = document.getElementById('btn-sms');
+      const bossPhone = "01012345678"; // 보스 실제 번호 입력 구간
+      const smsText = encodeURIComponent(`[AKG 문의] 추천인 ID: ${userRef} 보고 문의드립니다.`);
+      if (smsBtn) {
+        smsBtn.href = `sms:${bossPhone}?body=${smsText}`;
+      }
+    });
+  </script>
 </body>
 </html>
