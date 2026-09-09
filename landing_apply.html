@@ -170,16 +170,30 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "전송 중입니다...";
 
-        const payload = {
-          parentRef: document.getElementById('parentRef').value,
-          myRef: document.getElementById('myRef').value,
-          email: document.getElementById('email').value,
-          phone: document.getElementById('phone').value,
-          userAgent: navigator.userAgent,
-          resolution: `${window.screen.width}x${window.screen.height}`,
-          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          referrer: document.referrer || "직접 접속 (Direct)"
-        };
+// 기기 정보 간단 가공
+const rawUA = navigator.userAgent;
+let deviceType = "기타 PC";
+
+if (/iPhone|iPad|iPod/i.test(rawUA)) {
+  deviceType = "아이폰";
+} else if (/Android/i.test(rawUA)) {
+  deviceType = "안드로이드";
+} else if (/Windows/i.test(rawUA)) {
+  deviceType = "윈도우 PC";
+} else if (/Macintosh/i.test(rawUA)) {
+  deviceType = "맥북/맥";
+}
+
+const payload = {
+  parentRef: document.getElementById('parentRef').value,
+  myRef: document.getElementById('myRef').value,
+  email: document.getElementById('email').value,
+  phone: document.getElementById('phone').value,
+  userAgent: deviceType, // ★ 가공된 단어만 전송
+  resolution: `${window.screen.width}x${window.screen.height}`,
+  timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  referrer: document.referrer || "직접 접속 (Direct)"
+};
 
         fetch(GAS_URL, {
           method: 'POST',
