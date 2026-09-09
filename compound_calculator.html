@@ -111,12 +111,12 @@
         .summary-item .value.highlight {
             color: var(--accent-color);
         }
+        /* 테이블 컨테이너 내부 스크롤바 제거 및 전체 표시 설정 */
         .table-container {
             margin-top: 20px;
-            max-height: 400px;
-            overflow-y: auto;
             border: 1px solid var(--border-color);
             border-radius: 6px;
+            overflow: hidden;
         }
         table {
             width: 100%;
@@ -131,8 +131,6 @@
         th {
             background-color: #252525;
             color: #ccc;
-            position: sticky;
-            top: 0;
             text-align: right;
         }
         th:first-child, td:first-child {
@@ -148,7 +146,7 @@
     <div class="input-grid">
         <div class="input-group">
             <label for="principal">초기 원금 (원)</label>
-            <input type="text" id="principal" value="10,000,000" oninput="formatCurrencyInput(this)">
+            <input type="text" id="principal" value="1,000,000" oninput="formatCurrencyInput(this)">
         </div>
 
         <div class="input-group">
@@ -232,7 +230,6 @@
 </div>
 
 <script>
-// 입력 시 쉼표(,) 자동 삽입 함수
 function formatCurrencyInput(input) {
     let value = input.value.replace(/[^0-9]/g, '');
     if (value) {
@@ -242,7 +239,6 @@ function formatCurrencyInput(input) {
     }
 }
 
-// 숫자를 천 단위 쉼표 포맷으로 변환하는 헬퍼 함수
 function toFormattedString(num) {
     return Math.round(num).toLocaleString();
 }
@@ -267,7 +263,6 @@ function calculate() {
         return;
     }
 
-    // 1. 일일 이율(Daily Rate) 산출
     let dailyRate = 0;
     const baseRate = rateVal / 100;
 
@@ -279,13 +274,11 @@ function calculate() {
         dailyRate = baseRate / 365;
     }
 
-    // 2. 총 투자 기간 일수 환산
     let totalDays = 0;
     if (periodUnit === 'day') totalDays = periodVal;
     else if (periodUnit === 'month') totalDays = periodVal * 30;
     else if (periodUnit === 'year') totalDays = periodVal * 365;
 
-    // 3. 복리 주기 일수 환산
     let compoundDays = 0;
     if (compoundUnit === 'day') compoundDays = compoundVal;
     else if (compoundUnit === 'month') compoundDays = compoundVal * 30;
@@ -295,7 +288,6 @@ function calculate() {
     let accumulatedInterest = 0;
     const dailyRecords = [];
 
-    // 일별 수익 연산 및 복리 자본화
     for (let day = 1; day <= totalDays; day++) {
         const todaysInterest = currentBalance * dailyRate;
         accumulatedInterest += todaysInterest;
@@ -311,7 +303,6 @@ function calculate() {
         });
     }
 
-    // 출력 단위 설정
     let displayInterval = 1;
     let periodLabel = '일';
     if (displayUnit === 'month') {
@@ -347,7 +338,6 @@ function calculate() {
         prevBalance = record.balance;
     }
 
-    // 최종 요약 데이터 표출 (쉼표 적용)
     const finalBalance = dailyRecords[dailyRecords.length - 1].balance;
     const finalProfit = finalBalance - principal;
     const finalROI = (finalProfit / principal) * 100;
